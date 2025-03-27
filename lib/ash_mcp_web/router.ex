@@ -43,7 +43,13 @@ defmodule AshMcpWeb.Router do
 
     forward "/swaggerui", OpenApiSpex.Plug.SwaggerUI,
       path: "/api/json/open_api",
-      default_model_expand_depth: 4
+      default_model_expand_depth: 4,
+      init_opts: []
+
+    forward "/redoc",
+            Redoc.Plug.RedocUI,
+            spec_url: "/api/json/open_api",
+            init_opts: []
 
     forward "/", AshMcpWeb.AshJsonApiRouter
   end
