@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Timeline do
+defmodule AshStudioWeb.Components.Timeline do
   @moduledoc """
-  The `AshMcpWeb.Components.Timeline` module is a versatile and customizable component
+  The `AshStudioWeb.Components.Timeline` module is a versatile and customizable component
   designed for displaying timeline-style content in Phoenix LiveView applications.
 
   It allows users to present chronological or sequential events in both horizontal and vertical formats.

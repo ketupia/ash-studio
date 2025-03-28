@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.UrlField do
+defmodule AshStudioWeb.Components.UrlField do
   @moduledoc """
-  AshMcpWeb.Components.UrlField, A component for rendering a URL input field in a Phoenix application.
+  AshStudioWeb.Components.UrlField, A component for rendering a URL input field in a Phoenix application.
 
   This module provides a customizable URL input field with various options
   for styling and layout, including the ability to display errors, descriptions,
@@ -1024,9 +1024,9 @@ defmodule AshMcpWeb.Components.UrlField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

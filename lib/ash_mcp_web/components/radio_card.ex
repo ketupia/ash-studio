@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.RadioCard do
+defmodule AshStudioWeb.Components.RadioCard do
   @moduledoc """
-  The `AshMcpWeb.Components.RadioCard` module provides a customizable radio card component for Phoenix LiveView
+  The `AshStudioWeb.Components.RadioCard` module provides a customizable radio card component for Phoenix LiveView
   applications. This component extends beyond basic radio buttons by offering a card-based interface
   with rich styling options.
 
@@ -839,9 +839,9 @@ defmodule AshMcpWeb.Components.RadioCard do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

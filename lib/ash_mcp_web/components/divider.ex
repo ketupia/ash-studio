@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Divider do
+defmodule AshStudioWeb.Components.Divider do
   @moduledoc """
-  The `AshMcpWeb.Components.Divider` module provides a versatile and customizable divider
+  The `AshStudioWeb.Components.Divider` module provides a versatile and customizable divider
   component for creating horizontal and vertical dividers with various styling options
   in a Phoenix LiveView application.
 
@@ -177,7 +177,7 @@ defmodule AshMcpWeb.Components.Divider do
   end
 
   @doc """
-  `AshMcpWeb.Components.Divider.hr` is used to create a horizontal divider with customizable style, color,
+  `AshStudioWeb.Components.Divider.hr` is used to create a horizontal divider with customizable style, color,
   and size options.
 
   It can also include text or icons to enhance visual separation between content sections.

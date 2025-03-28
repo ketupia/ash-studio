@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Image do
+defmodule AshStudioWeb.Components.Image do
   @moduledoc """
-  The `AshMcpWeb.Components.Image` module provides a component for rendering images in a Phoenix application.
+  The `AshStudioWeb.Components.Image` module provides a component for rendering images in a Phoenix application.
   It supports various attributes to control the display, loading behavior, and styling of the image.
 
   This module simplifies the use of images with various configurations and styling

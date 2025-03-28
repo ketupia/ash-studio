@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Tooltip do
+defmodule AshStudioWeb.Components.Tooltip do
   @moduledoc """
-  A Tooltip AshMcpWeb.Components.Tooltip module for use in Phoenix applications.
+  A Tooltip AshStudioWeb.Components.Tooltip module for use in Phoenix applications.
 
   This component allows you to display informative text when the user hovers over or focuses on an element.
   It supports various customization options, including position, color themes, and sizes, allowing for

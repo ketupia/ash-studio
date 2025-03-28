@@ -1,13 +1,13 @@
-defmodule AshMcpWeb.Components.Overlay do
+defmodule AshStudioWeb.Components.Overlay do
   @moduledoc """
-  The `AshMcpWeb.Components.Overlay` module provides a versatile overlay component for
+  The `AshStudioWeb.Components.Overlay` module provides a versatile overlay component for
   Phoenix LiveView applications, allowing developers to create layered content effects.
   It supports various customization options, including color themes, opacity levels,
   and backdrop effects, which enable the creation of visually engaging overlays.
 
   This component is designed to be highly adaptable, offering predefined color themes,
   opacity variations, and backdrop sizes to match the needs of different interface designs.
-  The `AshMcpWeb.Components.Overlay` is perfect for creating modal backgrounds, loading screens,
+  The `AshStudioWeb.Components.Overlay` is perfect for creating modal backgrounds, loading screens,
   and other interactive elements that require content layering.
   """
 

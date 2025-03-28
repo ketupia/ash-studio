@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Button do
+defmodule AshStudioWeb.Components.Button do
   @moduledoc """
-  Provides a comprehensive set of button components for the `AshMcpWeb.Components.Button` project.
+  Provides a comprehensive set of button components for the `AshStudioWeb.Components.Button` project.
   These components are highly customizable, allowing various styles, sizes, colors,
   and configurations, including buttons with icons, gradients, and different indicator positions.
 

@@ -1,6 +1,6 @@
-defmodule AshMcp do
+defmodule AshStudio do
   @moduledoc """
-  AshMcp keeps the contexts that define your domain
+  AshStudio keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

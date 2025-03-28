@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Progress do
+defmodule AshStudioWeb.Components.Progress do
   @moduledoc """
-  The `AshMcpWeb.Components.Progress` module provides a customizable progress bar component for
+  The `AshStudioWeb.Components.Progress` module provides a customizable progress bar component for
   Phoenix LiveView applications.
 
   It offers a range of styling options, including different sizes, colors, and variants,

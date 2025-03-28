@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-config :ash_mcp, AshMcp.Repo,
+config :ash_studio, AshStudio.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "ash_mcp_dev",
+  database: "ash_studio_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -17,7 +17,7 @@ config :ash_mcp, AshMcp.Repo,
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
 # Binding to loopback ipv4 address prevents access from other machines.
-config :ash_mcp, AshMcpWeb.Endpoint,
+config :ash_studio, AshStudioWeb.Endpoint,
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
@@ -25,8 +25,8 @@ config :ash_mcp, AshMcpWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "8kzDptFu3js2BNZjlRkIeYS3VwJvGy2J8qgayVMBNjAD/DuktJcV6i6Th8bxH4jR",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:ash_mcp, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:ash_mcp, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:ash_studio, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:ash_studio, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -53,17 +53,17 @@ config :ash_mcp, AshMcpWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :ash_mcp, AshMcpWeb.Endpoint,
+config :ash_studio, AshStudioWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/ash_mcp_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/ash_studio_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :ash_mcp, dev_routes: true, token_signing_secret: "NmZMT0QvMkt8TnWmc5cev3NZQjcQZgp3"
+config :ash_studio, dev_routes: true, token_signing_secret: "NmZMT0QvMkt8TnWmc5cev3NZQjcQZgp3"
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

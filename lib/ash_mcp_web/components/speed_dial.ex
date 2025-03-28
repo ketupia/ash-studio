@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.SpeedDial do
+defmodule AshStudioWeb.Components.SpeedDial do
   @moduledoc """
-  The `AshMcpWeb.Components.SpeedDial` module provides a versatile speed dial component for Phoenix
+  The `AshStudioWeb.Components.SpeedDial` module provides a versatile speed dial component for Phoenix
   LiveView applications. This component enhances user interactions by offering a dynamic
   menu of actions that can be triggered from a single button. The speed dial is
   especially useful for applications that need to offer quick access to multiple
@@ -28,7 +28,7 @@ defmodule AshMcpWeb.Components.SpeedDial do
   """
 
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
   alias Phoenix.LiveView.JS
 
   @doc """

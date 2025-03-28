@@ -1,12 +1,12 @@
-defmodule AshMcpWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :ash_mcp
+defmodule AshStudioWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ash_studio
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_ash_mcp_key",
+    key: "_ash_studio_key",
     signing_salt: "YGA608Cq",
     same_site: "Lax"
   ]
@@ -21,9 +21,9 @@ defmodule AshMcpWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :ash_mcp,
+    from: :ash_studio,
     gzip: false,
-    only: AshMcpWeb.static_paths()
+    only: AshStudioWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -31,7 +31,7 @@ defmodule AshMcpWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :ash_mcp
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :ash_studio
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
@@ -49,5 +49,5 @@ defmodule AshMcpWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug AshMcpWeb.Router
+  plug AshStudioWeb.Router
 end

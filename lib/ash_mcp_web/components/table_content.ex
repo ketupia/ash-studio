@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.TableContent do
+defmodule AshStudioWeb.Components.TableContent do
   @moduledoc """
-  `AshMcpWeb.Components.TableContent` is a component module designed to create flexible and dynamic
+  `AshStudioWeb.Components.TableContent` is a component module designed to create flexible and dynamic
   content within a table. This module allows for a variety of customizations, including styles,
   colors, borders, padding, and animations. It is composed of several subcomponents such as
   `table_content/1`, `content_wrapper/1`, and `content_item/1`, each providing specific

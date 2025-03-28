@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Banner do
+defmodule AshStudioWeb.Components.Banner do
   @moduledoc """
-  AshMcpWeb.Components.Banner module provides components for rendering customizable banners in your **Phoenix LiveView**
+  AshStudioWeb.Components.Banner module provides components for rendering customizable banners in your **Phoenix LiveView**
   application.
 
   ## Features
@@ -28,7 +28,7 @@ defmodule AshMcpWeb.Components.Banner do
 
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
 
   @positions ["top_left", "top_right", "bottom_left", "bottom_right", "center", "full"]
 

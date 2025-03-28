@@ -1,14 +1,14 @@
-defmodule AshMcp.Accounts.User.Senders.SendPasswordResetEmail do
+defmodule AshStudio.Accounts.User.Senders.SendPasswordResetEmail do
   @moduledoc """
   Sends a password reset email
   """
 
   use AshAuthentication.Sender
-  use AshMcpWeb, :verified_routes
+  use AshStudioWeb, :verified_routes
 
   import Swoosh.Email
 
-  alias AshMcp.Mailer
+  alias AshStudio.Mailer
 
   @impl true
   def send(user, token, _) do

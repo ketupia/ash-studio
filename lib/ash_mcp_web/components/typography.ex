@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Typography do
+defmodule AshStudioWeb.Components.Typography do
   @moduledoc """
-  The `AshMcpWeb.Components.Typography` module provides components for rendering
+  The `AshStudioWeb.Components.Typography` module provides components for rendering
   typographic elements in a Phoenix application.
 
   This module offers various components such as headings (h1 to h6), paragraphs, and other

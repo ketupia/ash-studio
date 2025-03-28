@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Tabs do
+defmodule AshStudioWeb.Components.Tabs do
   @moduledoc """
-  `AshMcpWeb.Components.Tabs` is a Phoenix component module that provides a highly customizable tab
+  `AshStudioWeb.Components.Tabs` is a Phoenix component module that provides a highly customizable tab
   interface for organizing and displaying content.
 
   It allows the creation of both horizontal and vertical tabs with different styles, colors, and sizes.
@@ -26,7 +26,7 @@ defmodule AshMcpWeb.Components.Tabs do
 
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  import AshMcpWeb.Components.Badge, only: [badge: 1]
+  import AshStudioWeb.Components.Badge, only: [badge: 1]
 
   @doc """
   The `tabs` component provides a set of clickable tabs for organizing content.

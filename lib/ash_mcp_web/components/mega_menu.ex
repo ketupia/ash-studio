@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.MegaMenu do
+defmodule AshStudioWeb.Components.MegaMenu do
   @moduledoc """
-  The `AshMcpWeb.Components.MegaMenu` module provides a customizable and interactive mega menu component
+  The `AshStudioWeb.Components.MegaMenu` module provides a customizable and interactive mega menu component
   for building sophisticated navigation systems in Phoenix LiveView applications.
 
   This component can be used to create multi-level navigation menus with various styling and

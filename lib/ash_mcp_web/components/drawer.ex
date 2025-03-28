@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Drawer do
+defmodule AshStudioWeb.Components.Drawer do
   @moduledoc """
-  The `AshMcpWeb.Components.Drawer` module provides a flexible and customizable drawer component
+  The `AshStudioWeb.Components.Drawer` module provides a flexible and customizable drawer component
   for use in Phoenix LiveView applications.
 
   ## Features:
@@ -18,7 +18,7 @@ defmodule AshMcpWeb.Components.Drawer do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
 
   @doc """
   A `drawer` component for displaying content in a sliding panel. It can be positioned on the left or

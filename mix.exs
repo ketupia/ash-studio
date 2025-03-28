@@ -1,9 +1,9 @@
-defmodule AshMcp.MixProject do
+defmodule AshStudio.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :ash_mcp,
+      app: :ash_studio,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule AshMcp.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {AshMcp.Application, []},
+      mod: {AshStudio.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -90,10 +90,10 @@ defmodule AshMcp.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ash.setup --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind ash_mcp", "esbuild ash_mcp"],
+      "assets.build": ["tailwind ash_studio", "esbuild ash_studio"],
       "assets.deploy": [
-        "tailwind ash_mcp --minify",
-        "esbuild ash_mcp --minify",
+        "tailwind ash_studio --minify",
+        "esbuild ash_studio --minify",
         "phx.digest"
       ],
       "phx.routes": ["phx.routes", "ash_json_api.routes", "ash_authentication.phoenix.routes"]

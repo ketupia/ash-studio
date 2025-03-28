@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Carousel do
+defmodule AshStudioWeb.Components.Carousel do
   @moduledoc """
-  Provides a versatile and customizable carousel component for the `AshMcpWeb.Components.Carousel`
+  Provides a versatile and customizable carousel component for the `AshStudioWeb.Components.Carousel`
   project.
 
   This component enables the creation of image carousels with various features such as
@@ -22,7 +22,7 @@ defmodule AshMcpWeb.Components.Carousel do
 
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  import AshMcpWeb.Components.Image, only: [image: 1]
+  import AshStudioWeb.Components.Image, only: [image: 1]
 
   @doc """
   The `carousel` component is used to create interactive image carousels with customizable attributes

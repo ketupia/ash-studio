@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Jumbotron do
+defmodule AshStudioWeb.Components.Jumbotron do
   @moduledoc """
-  The `AshMcpWeb.Components.Jumbotron` module provides a versatile component for creating large,
+  The `AshStudioWeb.Components.Jumbotron` module provides a versatile component for creating large,
   prominent sections within a Phoenix LiveView or static page. This component is typically
   used for showcasing important content or messages, often at the top of a page, similar to a
   traditional `hero` section.

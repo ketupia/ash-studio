@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Breadcrumb do
+defmodule AshStudioWeb.Components.Breadcrumb do
   @moduledoc """
-  Provides a flexible and customizable `AshMcpWeb.Components.Breadcrumb` component for displaying
+  Provides a flexible and customizable `AshStudioWeb.Components.Breadcrumb` component for displaying
   breadcrumb navigation in your Phoenix LiveView applications.
 
   ## Features

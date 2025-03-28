@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Accordion do
+defmodule AshStudioWeb.Components.Accordion do
   @moduledoc """
-  The `AshMcpWeb.Components.Accordion` module provides a flexible and customizable accordion
+  The `AshStudioWeb.Components.Accordion` module provides a flexible and customizable accordion
   component for Phoenix LiveView applications.
 
   It supports a variety of configuration options including size, variant, color, padding,

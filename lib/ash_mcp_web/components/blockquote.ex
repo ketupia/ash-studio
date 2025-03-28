@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Blockquote do
+defmodule AshStudioWeb.Components.Blockquote do
   @moduledoc """
-  This module provides a versatile `AshMcpWeb.Components.Blockquote` component for creating
+  This module provides a versatile `AshStudioWeb.Components.Blockquote` component for creating
   stylish and customizable blockquotes in your Phoenix LiveView application.
 
   ## Features

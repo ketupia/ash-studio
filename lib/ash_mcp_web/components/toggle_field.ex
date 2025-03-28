@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.ToggleField do
+defmodule AshStudioWeb.Components.ToggleField do
   @moduledoc """
-  AshMcpWeb.Components.ToggleField component renders a toggle field with customizable options.
+  AshStudioWeb.Components.ToggleField component renders a toggle field with customizable options.
 
   This module provides functionality for creating a toggle switch UI element
   that can be integrated into forms. It supports various attributes to tailor
@@ -306,9 +306,9 @@ defmodule AshMcpWeb.Components.ToggleField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.CheckboxField do
+defmodule AshStudioWeb.Components.CheckboxField do
   @moduledoc """
-  AshMcpWeb.Components.CheckboxField Module Provides a customizable checkbox component for use in Phoenix LiveView forms.
+  AshStudioWeb.Components.CheckboxField Module Provides a customizable checkbox component for use in Phoenix LiveView forms.
 
   This module includes individual checkbox fields as well as grouped
   checkbox fields, each with configurable options such as colors, borders,
@@ -529,9 +529,9 @@ defmodule AshMcpWeb.Components.CheckboxField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 end

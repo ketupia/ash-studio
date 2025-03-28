@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Rating do
+defmodule AshStudioWeb.Components.Rating do
   @moduledoc """
-  The `AshMcpWeb.Components.Rating` module provides a versatile rating component for Phoenix LiveView
+  The `AshStudioWeb.Components.Rating` module provides a versatile rating component for Phoenix LiveView
   applications. This component is designed to display a configurable number of rating stars with
   customizable colors, sizes, and interactive capabilities.
 

@@ -1,4 +1,4 @@
-defmodule AshMcp.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuthExtensions1 do
+defmodule AshStudio.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuthExtensions1 do
   @moduledoc """
   Installs any extensions that are mentioned in the repo's `installed_extensions/0` callback
 

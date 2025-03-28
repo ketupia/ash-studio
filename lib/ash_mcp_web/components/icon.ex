@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Icon do
+defmodule AshStudioWeb.Components.Icon do
   @moduledoc """
-  The `AshMcpWeb.Components.Icon` module provides a flexible and reusable icon
+  The `AshStudioWeb.Components.Icon` module provides a flexible and reusable icon
   component for rendering various types of icons in a Phoenix LiveView application.
 
   ## Features:

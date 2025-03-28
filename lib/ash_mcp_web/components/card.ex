@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Card do
+defmodule AshStudioWeb.Components.Card do
   @moduledoc """
-  Provides a set of card components for the `AshMcpWeb.Components.Card` project. These components
+  Provides a set of card components for the `AshStudioWeb.Components.Card` project. These components
   allow for flexible and customizable card layouts, including features such as card titles,
   media, content sections, and footers.
 

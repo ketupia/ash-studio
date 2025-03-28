@@ -1,5 +1,6 @@
-defmodule AshMcpWeb.AshJsonApiRouter do
+defmodule AshStudioWeb.AshJsonApiRouter do
+  @moduledoc false
   use AshJsonApi.Router,
-    domains: [AshMcp.CodeGen],
+    domains: [AshStudio.CodeGen],
     open_api: "/open_api"
 end

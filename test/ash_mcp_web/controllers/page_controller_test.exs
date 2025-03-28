@@ -1,5 +1,5 @@
-defmodule AshMcpWeb.PageControllerTest do
-  use AshMcpWeb.ConnCase
+defmodule AshStudioWeb.PageControllerTest do
+  use AshStudioWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

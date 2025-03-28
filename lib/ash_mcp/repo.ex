@@ -1,6 +1,6 @@
-defmodule AshMcp.Repo do
+defmodule AshStudio.Repo do
   use AshPostgres.Repo,
-    otp_app: :ash_mcp
+    otp_app: :ash_studio
 
   def installed_extensions do
     # Add extensions here, and the migration generator will install them.

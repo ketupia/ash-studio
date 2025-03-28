@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Fieldset do
+defmodule AshStudioWeb.Components.Fieldset do
   @moduledoc """
-  The `AshMcpWeb.Components.Fieldset` module provides a reusable and customizable
+  The `AshStudioWeb.Components.Fieldset` module provides a reusable and customizable
   component for creating styled fieldsets in Phoenix LiveView applications.
 
   It offers various options for styling, layout, and interaction, including:

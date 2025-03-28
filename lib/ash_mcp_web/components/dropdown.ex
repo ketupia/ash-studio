@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Dropdown do
+defmodule AshStudioWeb.Components.Dropdown do
   @moduledoc """
-  The `AshMcpWeb.Components.Dropdown` module provides a customizable dropdown component
+  The `AshStudioWeb.Components.Dropdown` module provides a customizable dropdown component
   built using Phoenix LiveView. It allows you to create dropdown menus with different styles,
   positions, and behaviors, supporting various customization options through attributes and slots.
 

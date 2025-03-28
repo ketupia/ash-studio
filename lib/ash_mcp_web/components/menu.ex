@@ -1,13 +1,13 @@
-defmodule AshMcpWeb.Components.Menu do
+defmodule AshStudioWeb.Components.Menu do
   @moduledoc """
-  The `AshMcpWeb.Components.Menu` module is designed to render a hierarchical menu structure in
+  The `AshStudioWeb.Components.Menu` module is designed to render a hierarchical menu structure in
   Phoenix LiveView applications. It provides a versatile menu component capable of
   handling both simple and complex navigation systems with nested sub-menus.
 
   This module supports dynamic configuration of menu items through a list of maps,
   allowing for a wide range of customization options. Menu items can be rendered as
   standalone buttons or as expandable accordions containing nested sub-menus.
-  The `AshMcpWeb.Components.Menu` is ideal for creating multi-level navigation menus in
+  The `AshStudioWeb.Components.Menu` is ideal for creating multi-level navigation menus in
   applications with complex information architectures.
 
   The component integrates smoothly with other components from the `MishkaChelekom`
@@ -16,8 +16,8 @@ defmodule AshMcpWeb.Components.Menu do
   control the layout and appearance of the menu.
   """
   use Phoenix.Component
-  import AshMcpWeb.Components.Accordion, only: [accordion: 1]
-  import AshMcpWeb.Components.Button, only: [button_link: 1]
+  import AshStudioWeb.Components.Accordion, only: [accordion: 1]
+  import AshStudioWeb.Components.Button, only: [button_link: 1]
 
   @doc """
   Renders a customizable `menu` component that can include menu items as a list of maps or use

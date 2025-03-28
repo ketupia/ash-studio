@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.RangeField do
+defmodule AshStudioWeb.Components.RangeField do
   @moduledoc """
-  The `AshMcpWeb.Components.RangeField` module provides a comprehensive range input field
+  The `AshStudioWeb.Components.RangeField` module provides a comprehensive range input field
   component for Phoenix LiveView applications. This component is designed with flexibility and
   customization in mind, allowing developers to configure various aspects such as size, color, and
   styling options.
@@ -434,9 +434,9 @@ defmodule AshMcpWeb.Components.RangeField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

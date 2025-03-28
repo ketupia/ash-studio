@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.SearchField do
+defmodule AshStudioWeb.Components.SearchField do
   @moduledoc """
-  The `AshMcpWeb.Components.SearchField` module provides a highly customizable search input
+  The `AshStudioWeb.Components.SearchField` module provides a highly customizable search input
   component for Phoenix LiveView applications. This component is designed to offer advanced
   search functionality with support for custom styles, layouts, and interactions.
 
@@ -1043,9 +1043,9 @@ defmodule AshMcpWeb.Components.SearchField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

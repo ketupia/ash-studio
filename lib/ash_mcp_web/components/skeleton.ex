@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Skeleton do
+defmodule AshStudioWeb.Components.Skeleton do
   @moduledoc """
-  The `AshMcpWeb.Components.Skeleton` module provides a reusable component for displaying skeleton
+  The `AshStudioWeb.Components.Skeleton` module provides a reusable component for displaying skeleton
   loaders in a Phoenix LiveView application. Skeleton loaders serve as placeholders to indicate
   that content is currently loading or being processed, improving the user experience by offering
   a visual cue in place of the final content.

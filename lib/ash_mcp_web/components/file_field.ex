@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.FileField do
+defmodule AshStudioWeb.Components.FileField do
   @moduledoc """
-  The `AshMcpWeb.Components.FileField` module provides a versatile and customizable component
+  The `AshStudioWeb.Components.FileField` module provides a versatile and customizable component
   for handling file uploads in Phoenix LiveView applications.
 
   This module supports various configurations, allowing users to upload files or
@@ -20,8 +20,8 @@ defmodule AshMcpWeb.Components.FileField do
   """
 
   use Phoenix.Component
-  import AshMcpWeb.Components.Progress, only: [progress: 1]
-  import AshMcpWeb.Components.Spinner, only: [spinner: 1]
+  import AshStudioWeb.Components.Progress, only: [progress: 1]
+  import AshStudioWeb.Components.Spinner, only: [spinner: 1]
 
   @doc """
   Renders a `file_input` field with customizable styles, labels, and live upload capabilities.
@@ -914,9 +914,9 @@ defmodule AshMcpWeb.Components.FileField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

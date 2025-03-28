@@ -63,20 +63,20 @@ config :spark,
     ]
   ]
 
-config :ash_mcp,
-  ecto_repos: [AshMcp.Repo],
+config :ash_studio,
+  ecto_repos: [AshStudio.Repo],
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [AshMcp.Accounts, AshMcp.CodeGen]
+  ash_domains: [AshStudio.Accounts, AshStudio.CodeGen]
 
 # Configures the endpoint
-config :ash_mcp, AshMcpWeb.Endpoint,
+config :ash_studio, AshStudioWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: AshMcpWeb.ErrorHTML, json: AshMcpWeb.ErrorJSON],
+    formats: [html: AshStudioWeb.ErrorHTML, json: AshStudioWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: AshMcp.PubSub,
+  pubsub_server: AshStudio.PubSub,
   live_view: [signing_salt: "WMdoWC8c"]
 
 # Configures the mailer
@@ -86,12 +86,12 @@ config :ash_mcp, AshMcpWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :ash_mcp, AshMcp.Mailer, adapter: Swoosh.Adapters.Local
+config :ash_studio, AshStudio.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  ash_mcp: [
+  ash_studio: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -101,7 +101,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.3",
-  ash_mcp: [
+  ash_studio: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

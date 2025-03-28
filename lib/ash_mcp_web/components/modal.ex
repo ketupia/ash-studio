@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Modal do
+defmodule AshStudioWeb.Components.Modal do
   @moduledoc """
-  The `AshMcpWeb.Components.Modal` module provides a versatile and customizable modal component for
+  The `AshStudioWeb.Components.Modal` module provides a versatile and customizable modal component for
   Phoenix LiveView applications. It supports various configurations for size, style, color,
   padding, and border radius to match different design requirements. The module is designed
   to facilitate user interactions with dynamic content, such as forms,
@@ -17,7 +17,7 @@ defmodule AshMcpWeb.Components.Modal do
   """
 
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
   alias Phoenix.LiveView.JS
 
   @doc """

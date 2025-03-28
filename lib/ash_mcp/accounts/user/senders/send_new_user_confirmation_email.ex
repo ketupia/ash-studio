@@ -1,14 +1,14 @@
-defmodule AshMcp.Accounts.User.Senders.SendNewUserConfirmationEmail do
+defmodule AshStudio.Accounts.User.Senders.SendNewUserConfirmationEmail do
   @moduledoc """
   Sends an email for a new user to confirm their email address.
   """
 
   use AshAuthentication.Sender
-  use AshMcpWeb, :verified_routes
+  use AshStudioWeb, :verified_routes
 
   import Swoosh.Email
 
-  alias AshMcp.Mailer
+  alias AshStudio.Mailer
 
   @impl true
   def send(user, token, _) do

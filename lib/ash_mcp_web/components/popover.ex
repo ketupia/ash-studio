@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Popover do
+defmodule AshStudioWeb.Components.Popover do
   @moduledoc """
-  The `AshMcpWeb.Components.Popover` module provides a versatile popover component for Phoenix LiveView
+  The `AshStudioWeb.Components.Popover` module provides a versatile popover component for Phoenix LiveView
   applications. It allows developers to create interactive and visually appealing popover elements
   with various customization options.
 

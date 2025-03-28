@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Sidebar do
+defmodule AshStudioWeb.Components.Sidebar do
   @moduledoc """
-  The `AshMcpWeb.Components.Sidebar` module provides a versatile and customizable sidebar
+  The `AshStudioWeb.Components.Sidebar` module provides a versatile and customizable sidebar
   component for Phoenix LiveView applications. This component is designed to create a
   navigation or information panel that can be toggled in and out of view, enhancing the user
   experience by offering easy access to additional content or navigation links.
@@ -15,7 +15,7 @@ defmodule AshMcpWeb.Components.Sidebar do
   for a cohesive and interactive application experience.
   """
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
   alias Phoenix.LiveView.JS
 
   @doc """

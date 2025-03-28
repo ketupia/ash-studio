@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Navbar do
+defmodule AshStudioWeb.Components.Navbar do
   @moduledoc """
-  The `AshMcpWeb.Components.Navbar` module provides a flexible and customizable navigation
+  The `AshStudioWeb.Components.Navbar` module provides a flexible and customizable navigation
   bar component for Phoenix LiveView applications. It allows for a variety of styles,
   colors, and configurations to fit different design needs, including border styles,
   content alignment, and text positioning.

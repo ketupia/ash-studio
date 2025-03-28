@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Pagination do
+defmodule AshStudioWeb.Components.Pagination do
   @moduledoc """
-  The `AshMcpWeb.Components.Pagination` module provides a comprehensive and highly customizable
+  The `AshStudioWeb.Components.Pagination` module provides a comprehensive and highly customizable
   pagination component for Phoenix LiveView applications.
 
   It is designed to handle complex pagination scenarios, supporting various styles,

@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.PasswordField do
+defmodule AshStudioWeb.Components.PasswordField do
   @moduledoc """
-  The `AshMcpWeb.Components.PasswordField` module is a Phoenix component designed to render a customizable
+  The `AshStudioWeb.Components.PasswordField` module is a Phoenix component designed to render a customizable
   password input field within LiveView applications. It provides a flexible and highly configurable
   way to integrate password inputs with various visual styles, handling for error messages, and
   toggle functionality for showing or hiding password text.
@@ -1060,9 +1060,9 @@ defmodule AshMcpWeb.Components.PasswordField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Components.PasswordField.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Components.PasswordField.Gettext, "errors", msg, opts)
     end
   end
 

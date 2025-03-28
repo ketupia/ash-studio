@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.DeviceMockup do
+defmodule AshStudioWeb.Components.DeviceMockup do
   @moduledoc """
-  The `AshMcpWeb.Components.DeviceMockup` module provides a customizable component for displaying
+  The `AshStudioWeb.Components.DeviceMockup` module provides a customizable component for displaying
   various device mockups such as iPhone, Android, Watch, Laptop, iPad, and iMac.
 
   It supports different color themes and includes options for adding images or custom
@@ -14,7 +14,7 @@ defmodule AshMcpWeb.Components.DeviceMockup do
   application previews.
   """
   use Phoenix.Component
-  import AshMcpWeb.Components.Image, only: [image: 1]
+  import AshStudioWeb.Components.Image, only: [image: 1]
 
   @doc """
   The `device_mockup` component renders a responsive device mockup for various devices like

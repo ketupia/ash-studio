@@ -1,4 +1,4 @@
-defmodule AshMcpWeb.Components.Toast do
+defmodule AshStudioWeb.Components.Toast do
   @moduledoc """
   A module for creating toast notifications in a Phoenix application.
 
@@ -18,7 +18,7 @@ defmodule AshMcpWeb.Components.Toast do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
 
   @doc """
   The `toast` component displays temporary notifications or messages, usually at the top

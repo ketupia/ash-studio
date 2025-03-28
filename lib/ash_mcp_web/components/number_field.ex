@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.NumberField do
+defmodule AshStudioWeb.Components.NumberField do
   @moduledoc """
-  The `AshMcpWeb.Components.NumberField` module provides a versatile and customizable
+  The `AshStudioWeb.Components.NumberField` module provides a versatile and customizable
   number input component for Phoenix LiveView applications. This component offers
   extensive options for theming, styling, and layout configurations, including border styles,
   color variants, rounded corners, and size settings.
@@ -1036,9 +1036,9 @@ defmodule AshMcpWeb.Components.NumberField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

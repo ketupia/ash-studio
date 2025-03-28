@@ -1,13 +1,13 @@
-defmodule AshMcp.Secrets do
+defmodule AshStudio.Secrets do
   @moduledoc false
   use AshAuthentication.Secret
 
   def secret_for(
         [:authentication, :tokens, :signing_secret],
-        AshMcp.Accounts.User,
+        AshStudio.Accounts.User,
         _opts,
         _context
       ) do
-    Application.fetch_env(:ash_mcp, :token_signing_secret)
+    Application.fetch_env(:ash_studio, :token_signing_secret)
   end
 end

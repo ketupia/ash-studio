@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Spinner do
+defmodule AshStudioWeb.Components.Spinner do
   @moduledoc """
-  The `AshMcpWeb.Components.Spinner` module provides a dynamic and customizable loading spinner
+  The `AshStudioWeb.Components.Spinner` module provides a dynamic and customizable loading spinner
   component for Phoenix LiveView applications. It supports various animation styles and
   configurations to visually indicate ongoing processes or loading states within an application.
 
@@ -9,7 +9,7 @@ defmodule AshMcpWeb.Components.Spinner do
   It also allows extensive customization, including color themes and size variations,
   making it adaptable to different UI designs and user interfaces.
 
-  With its flexible design, the `AshMcpWeb.Components.Spinner` module enables developers to provide
+  With its flexible design, the `AshStudioWeb.Components.Spinner` module enables developers to provide
   visual feedback for asynchronous operations, enhancing user experience and maintaining engagement
   during content loading or background processes.
   """

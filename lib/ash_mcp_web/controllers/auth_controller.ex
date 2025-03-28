@@ -1,5 +1,5 @@
-defmodule AshMcpWeb.AuthController do
-  use AshMcpWeb, :controller
+defmodule AshStudioWeb.AuthController do
+  use AshStudioWeb, :controller
   use AshAuthentication.Phoenix.Controller
 
   def success(conn, activity, user, _token) do

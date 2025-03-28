@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.DateTimeField do
+defmodule AshStudioWeb.Components.DateTimeField do
   @moduledoc """
-  The `AshMcpWeb.Components.DateTimeField` module provides a reusable component for rendering
+  The `AshStudioWeb.Components.DateTimeField` module provides a reusable component for rendering
   various types of date and time inputs in Phoenix applications.
 
   It includes options for customization, validation, and styling, supporting different
@@ -1072,9 +1072,9 @@ defmodule AshMcpWeb.Components.DateTimeField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

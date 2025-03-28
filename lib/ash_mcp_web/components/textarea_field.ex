@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.TextareaField do
+defmodule AshStudioWeb.Components.TextareaField do
   @moduledoc """
-  The `AshMcpWeb.Components.TextareaField` module provides a versatile and customizable textarea field component
+  The `AshStudioWeb.Components.TextareaField` module provides a versatile and customizable textarea field component
   for Phoenix LiveView applications. It supports a range of styles, themes, and functional attributes
   to enhance the user experience when working with large text inputs.
 
@@ -996,9 +996,9 @@ defmodule AshMcpWeb.Components.TextareaField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

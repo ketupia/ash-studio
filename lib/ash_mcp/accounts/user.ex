@@ -1,7 +1,7 @@
-defmodule AshMcp.Accounts.User do
+defmodule AshStudio.Accounts.User do
   use Ash.Resource,
-    otp_app: :ash_mcp,
-    domain: AshMcp.Accounts,
+    otp_app: :ash_studio,
+    domain: AshStudio.Accounts,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshAuthentication],
     data_layer: AshPostgres.DataLayer
@@ -17,14 +17,14 @@ defmodule AshMcp.Accounts.User do
         confirm_on_create? true
         confirm_on_update? false
         auto_confirm_actions [:sign_in_with_magic_link, :reset_password_with_token]
-        sender AshMcp.Accounts.User.Senders.SendNewUserConfirmationEmail
+        sender AshStudio.Accounts.User.Senders.SendNewUserConfirmationEmail
       end
     end
 
     tokens do
       enabled? true
-      token_resource AshMcp.Accounts.Token
-      signing_secret AshMcp.Secrets
+      token_resource AshStudio.Accounts.Token
+      signing_secret AshStudio.Secrets
       store_all_tokens? true
       require_token_presence_for_authentication? true
     end
@@ -34,7 +34,7 @@ defmodule AshMcp.Accounts.User do
         identity_field :email
 
         resettable do
-          sender AshMcp.Accounts.User.Senders.SendPasswordResetEmail
+          sender AshStudio.Accounts.User.Senders.SendPasswordResetEmail
           # these configurations will be the default in a future release
           password_reset_action_name :reset_password_with_token
           request_password_reset_action_name :request_password_reset_token
@@ -45,7 +45,7 @@ defmodule AshMcp.Accounts.User do
 
   postgres do
     table "users"
-    repo AshMcp.Repo
+    repo AshStudio.Repo
   end
 
   actions do

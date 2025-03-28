@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.TelField do
+defmodule AshStudioWeb.Components.TelField do
   @moduledoc """
-  The `AshMcpWeb.Components.TelField` module provides a highly customizable telephone input field
+  The `AshStudioWeb.Components.TelField` module provides a highly customizable telephone input field
   component for use in Phoenix LiveView applications. This component supports various styling
   options such as color themes, border styles, padding, and more.
 
@@ -1037,9 +1037,9 @@ defmodule AshMcpWeb.Components.TelField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

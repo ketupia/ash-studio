@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Footer do
+defmodule AshStudioWeb.Components.Footer do
   @moduledoc """
-  The `AshMcpWeb.Components.Footer` module provides a customizable footer component for Phoenix applications,
+  The `AshStudioWeb.Components.Footer` module provides a customizable footer component for Phoenix applications,
   allowing for various styles, colors, and layout options. It supports different design variants
   such as default, outline, transparent, shadow, and unbordered.
 

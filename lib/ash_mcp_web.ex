@@ -1,12 +1,12 @@
-defmodule AshMcpWeb do
+defmodule AshStudioWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use AshMcpWeb, :controller
-      use AshMcpWeb, :html
+      use AshStudioWeb, :controller
+      use AshStudioWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,9 +40,9 @@ defmodule AshMcpWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: AshMcpWeb.Layouts]
+        layouts: [html: AshStudioWeb.Layouts]
 
-      use Gettext, backend: AshMcpWeb.Gettext
+      use Gettext, backend: AshStudioWeb.Gettext
 
       import Plug.Conn
 
@@ -53,7 +53,7 @@ defmodule AshMcpWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {AshMcpWeb.Layouts, :app}
+        layout: {AshStudioWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -83,12 +83,12 @@ defmodule AshMcpWeb do
   defp html_helpers do
     quote do
       # Translation
-      use Gettext, backend: AshMcpWeb.Gettext
+      use Gettext, backend: AshStudioWeb.Gettext
 
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components
-      use AshMcpWeb.Components.MishkaComponents
+      use AshStudioWeb.Components.MishkaComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -101,9 +101,9 @@ defmodule AshMcpWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: AshMcpWeb.Endpoint,
-        router: AshMcpWeb.Router,
-        statics: AshMcpWeb.static_paths()
+        endpoint: AshStudioWeb.Endpoint,
+        router: AshStudioWeb.Router,
+        statics: AshStudioWeb.static_paths()
     end
   end
 

@@ -1,5 +1,5 @@
-defmodule AshMcpWeb.PageController do
-  use AshMcpWeb, :controller
+defmodule AshStudioWeb.PageController do
+  use AshStudioWeb, :controller
 
   def home(conn, _params) do
     # The home page is often custom made,

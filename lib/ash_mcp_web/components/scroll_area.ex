@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.ScrollArea do
+defmodule AshStudioWeb.Components.ScrollArea do
   @moduledoc """
-  The `AshMcpWeb.Components.ScrollArea` module provides a customizable scroll area component for Phoenix LiveView
+  The `AshStudioWeb.Components.ScrollArea` module provides a customizable scroll area component for Phoenix LiveView
   applications. This component enables efficient content scrolling with enhanced user
   experience and control.
 

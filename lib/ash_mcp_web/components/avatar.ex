@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Avatar do
+defmodule AshStudioWeb.Components.Avatar do
   @moduledoc """
-  The `AshMcpWeb.Components.Avatar` module provides a set of components for creating and
+  The `AshStudioWeb.Components.Avatar` module provides a set of components for creating and
   managing avatar elements in your **Phoenix LiveView** applications.
 
   It supports various avatar types, including standard avatars, placeholders, and placeholder icons.

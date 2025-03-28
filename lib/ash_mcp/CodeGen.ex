@@ -1,9 +1,9 @@
-defmodule AshMcp.CodeGen do
+defmodule AshStudio.CodeGen do
   @moduledoc """
   Services that generate command line instructions for code generation.
   """
 
-  use Ash.Domain, otp_app: :ash_mcp, extensions: [AshAdmin.Domain, AshJsonApi.Domain]
+  use Ash.Domain, otp_app: :ash_studio, extensions: [AshAdmin.Domain, AshJsonApi.Domain]
 
   admin do
     show? true
@@ -11,13 +11,18 @@ defmodule AshMcp.CodeGen do
 
   json_api do
     routes do
-      base_route "/plan-resources", AshMcp.CodeGen.PlanResource do
+      base_route "/resources", AshStudio.CodeGen.Resource do
         post :plan
+      end
+
+      base_route "/domains", AshStudio.CodeGen.Domain do
+        get :info
       end
     end
   end
 
   resources do
-    resource AshMcp.CodeGen.PlanResource
+    resource AshStudio.CodeGen.Domain
+    resource AshStudio.CodeGen.Resource
   end
 end

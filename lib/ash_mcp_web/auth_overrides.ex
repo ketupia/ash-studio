@@ -1,4 +1,4 @@
-defmodule AshMcpWeb.AuthOverrides do
+defmodule AshStudioWeb.AuthOverrides do
   use AshAuthentication.Phoenix.Overrides
 
   # configure your UI overrides here

@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Alert do
+defmodule AshStudioWeb.Components.Alert do
   @moduledoc """
-  AshMcpWeb.Components.Alert module provides collection of alert components and helper functions for managing and displaying alerts
+  AshStudioWeb.Components.Alert module provides collection of alert components and helper functions for managing and displaying alerts
   in a **Phoenix LiveView** application.
 
   This module provides a set of customizable components for rendering various types of alerts,
@@ -26,7 +26,7 @@ defmodule AshMcpWeb.Components.Alert do
   flexibility in rendering custom content within alerts.
   """
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
   alias Phoenix.LiveView.JS
 
   @doc type: :component

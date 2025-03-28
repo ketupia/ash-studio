@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.EmailField do
+defmodule AshStudioWeb.Components.EmailField do
   @moduledoc """
-  The `AshMcpWeb.Components.EmailField` module provides a customizable email input field
+  The `AshStudioWeb.Components.EmailField` module provides a customizable email input field
   component built using Phoenix LiveView. It offers extensive styling options and behavior
   customizations for email input fields, such as:
 
@@ -1031,9 +1031,9 @@ defmodule AshMcpWeb.Components.EmailField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

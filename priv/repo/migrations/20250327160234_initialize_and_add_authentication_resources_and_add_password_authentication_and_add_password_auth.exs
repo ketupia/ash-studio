@@ -1,4 +1,4 @@
-defmodule AshMcp.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuth do
+defmodule AshStudio.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuth do
   @moduledoc """
   Updates resources based on their most recent snapshots.
 

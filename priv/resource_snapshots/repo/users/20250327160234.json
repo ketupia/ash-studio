@@ -68,7 +68,7 @@
     "global": null,
     "strategy": null
   },
-  "repo": "Elixir.AshMcp.Repo",
+  "repo": "Elixir.AshStudio.Repo",
   "schema": null,
   "table": "users"
 }

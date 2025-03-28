@@ -1,4 +1,4 @@
-# 🧠 ash_mcp
+# 🧠 ash_studio
 
 A modular, AI-friendly **command protocol framework** built on [Ash Framework](https://ash-hq.org) and Phoenix LiveView.
 
@@ -85,8 +85,8 @@ Agents (or UIs) can discover all services via:
 ## 🛠️ Setup
 
 ```bash
-git clone https://github.com/yourname/ash_mcp
-cd ash_mcp
+git clone https://github.com/yourname/ash_studio
+cd ash_studio
 mix deps.get
 mix ash.generate_registry
 mix phx.server

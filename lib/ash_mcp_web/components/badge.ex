@@ -1,8 +1,8 @@
-defmodule AshMcpWeb.Components.Badge do
+defmodule AshStudioWeb.Components.Badge do
   @moduledoc """
   Provides customizable and flexible badge components for use in Phoenix LiveView.
 
-  The `AshMcpWeb.Components.Badge` module allows you to create badge elements with various styles,
+  The `AshStudioWeb.Components.Badge` module allows you to create badge elements with various styles,
   sizes, and colors. You can add icons, indicators, and dismiss buttons, and configure
   the badge's appearance and behavior using a range of attributes.
   This module also provides helper functions to show and hide badges with smooth transition effects.

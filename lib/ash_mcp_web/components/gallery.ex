@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Gallery do
+defmodule AshStudioWeb.Components.Gallery do
   @moduledoc """
-  The `AshMcpWeb.Components.Gallery` module provides a customizable gallery component for displaying
+  The `AshStudioWeb.Components.Gallery` module provides a customizable gallery component for displaying
   media content in a structured and visually appealing layout.
 
   It supports various styles, including default, masonry, and featured galleries,

@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.ColorField do
+defmodule AshStudioWeb.Components.ColorField do
   @moduledoc """
-  The `AshMcpWeb.Components.ColorField` module provides a reusable and customizable color
+  The `AshStudioWeb.Components.ColorField` module provides a reusable and customizable color
   input component for Phoenix applications. This component supports various styling options,
   error handling, and additional customization through attributes and slots.
 
@@ -321,9 +321,9 @@ defmodule AshMcpWeb.Components.ColorField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

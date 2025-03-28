@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Combobox do
+defmodule AshStudioWeb.Components.Combobox do
   @moduledoc """
-  The `AshMcpWeb.Components.Combobox` is a Phoenix LiveView component module for creating customizable combobox elements.
+  The `AshStudioWeb.Components.Combobox` is a Phoenix LiveView component module for creating customizable combobox elements.
 
   This module provides components to display combobox/select inputs with various styles, colors,
   sizes, and configurations. The main component, `combobox/1`, acts as a container for select options,
@@ -15,8 +15,8 @@ defmodule AshMcpWeb.Components.Combobox do
   """
 
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
-  import AshMcpWeb.Components.ScrollArea, only: [scroll_area: 1]
+  use Gettext, backend: AshStudioWeb.Gettext
+  import AshStudioWeb.Components.ScrollArea, only: [scroll_area: 1]
   import Phoenix.LiveView.Utils, only: [random_id: 0]
 
   @doc """
@@ -998,9 +998,9 @@ defmodule AshMcpWeb.Components.Combobox do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

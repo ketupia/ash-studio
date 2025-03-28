@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Indicator do
+defmodule AshStudioWeb.Components.Indicator do
   @moduledoc """
-  The `AshMcpWeb.Components.Indicator` module provides a versatile component for visually highlighting
+  The `AshStudioWeb.Components.Indicator` module provides a versatile component for visually highlighting
   specific areas or elements in your Phoenix application.
 
   It is designed to display small, circular indicators that can be used for notifications,

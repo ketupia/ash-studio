@@ -1,4 +1,4 @@
-defmodule AshMcpWeb.CoreComponents do
+defmodule AshStudioWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -15,7 +15,7 @@ defmodule AshMcpWeb.CoreComponents do
   Icons are provided by [heroicons](https://heroicons.com). See `icon/1` for usage.
   """
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
 
   alias Phoenix.LiveView.JS
 
@@ -661,9 +661,9 @@ defmodule AshMcpWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

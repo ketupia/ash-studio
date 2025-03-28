@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.CheckboxCard do
+defmodule AshStudioWeb.Components.CheckboxCard do
   @moduledoc """
-  The `AshMcpWeb.Components.CheckboxCard` module provides a customizable checkbox card component for Phoenix LiveView
+  The `AshStudioWeb.Components.CheckboxCard` module provides a customizable checkbox card component for Phoenix LiveView
   applications. This component extends beyond basic checkbox buttons by offering a card-based interface
   with rich styling options.
 
@@ -844,9 +844,9 @@ defmodule AshMcpWeb.Components.CheckboxCard do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

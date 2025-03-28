@@ -1,4 +1,4 @@
-defmodule AshMcp.DataCase do
+defmodule AshStudio.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule AshMcp.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use AshMcp.DataCase, async: true`, although
+  by setting `use AshStudio.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule AshMcp.DataCase do
 
   using do
     quote do
-      alias AshMcp.Repo
+      alias AshStudio.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import AshMcp.DataCase
+      import AshStudio.DataCase
     end
   end
 
   setup tags do
-    AshMcp.DataCase.setup_sandbox(tags)
+    AshStudio.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,7 +36,7 @@ defmodule AshMcp.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(AshMcp.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(AshStudio.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

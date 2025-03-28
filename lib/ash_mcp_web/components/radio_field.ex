@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.RadioField do
+defmodule AshStudioWeb.Components.RadioField do
   @moduledoc """
-  The `AshMcpWeb.Components.RadioField` module provides a highly customizable radio button
+  The `AshStudioWeb.Components.RadioField` module provides a highly customizable radio button
   component for Phoenix LiveView applications. This module supports various styling options,
   including different colors, sizes, and border styles, allowing developers to
   integrate radio buttons seamlessly into their design system.
@@ -482,9 +482,9 @@ defmodule AshMcpWeb.Components.RadioField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

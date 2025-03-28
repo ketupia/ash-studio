@@ -1,14 +1,14 @@
-defmodule AshMcp.Accounts.Token do
+defmodule AshStudio.Accounts.Token do
   use Ash.Resource,
-    otp_app: :ash_mcp,
-    domain: AshMcp.Accounts,
+    otp_app: :ash_studio,
+    domain: AshStudio.Accounts,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshAuthentication.TokenResource],
     data_layer: AshPostgres.DataLayer
 
   postgres do
     table "tokens"
-    repo AshMcp.Repo
+    repo AshStudio.Repo
   end
 
   actions do

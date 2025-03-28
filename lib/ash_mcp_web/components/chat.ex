@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Chat do
+defmodule AshStudioWeb.Components.Chat do
   @moduledoc """
-  `AshMcpWeb.Components.Chat` is a Phoenix LiveView component module for creating customizable chat interfaces.
+  `AshStudioWeb.Components.Chat` is a Phoenix LiveView component module for creating customizable chat interfaces.
 
   This module provides components to display chat messages with various styles, colors,
   sizes, and configurations. The main component, `chat/1`, acts as a container for chat

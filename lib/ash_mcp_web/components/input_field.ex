@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.InputField do
+defmodule AshStudioWeb.Components.InputField do
   @moduledoc """
-  The `AshMcpWeb.Components.InputField` module provides a customizable input field component that
+  The `AshStudioWeb.Components.InputField` module provides a customizable input field component that
   integrates with Phoenix forms.
 
   This component supports a variety of input types, including text, email, password,
@@ -219,9 +219,9 @@ defmodule AshMcpWeb.Components.InputField do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(AshMcpWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AshStudioWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(AshMcpWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AshStudioWeb.Gettext, "errors", msg, opts)
     end
   end
 

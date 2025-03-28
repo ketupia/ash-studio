@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Keyboard do
+defmodule AshStudioWeb.Components.Keyboard do
   @moduledoc """
-  The `AshMcpWeb.Components.Keyboard` module provides a customizable keyboard component,
+  The `AshStudioWeb.Components.Keyboard` module provides a customizable keyboard component,
   primarily used for displaying keyboard shortcuts, key combinations, or highlighting
   key inputs in a user interface. The component is designed with flexibility in mind,
   allowing you to easily change its appearance and style through various attributes.

@@ -1,6 +1,6 @@
-defmodule AshMcpWeb.Components.Table do
+defmodule AshStudioWeb.Components.Table do
   @moduledoc """
-  `AshMcpWeb.Components.Table` is a versatile component for creating customizable tables in a
+  `AshStudioWeb.Components.Table` is a versatile component for creating customizable tables in a
   Phoenix LiveView application. This module offers a wide range of configurations to tailor table
   presentations, including options for styling, borders, text alignment, padding, and various visual variants.
 
@@ -13,7 +13,7 @@ defmodule AshMcpWeb.Components.Table do
   """
 
   use Phoenix.Component
-  use Gettext, backend: AshMcpWeb.Gettext
+  use Gettext, backend: AshStudioWeb.Gettext
 
   @doc """
   Renders a customizable `table` component that supports custom styling for rows, columns,
