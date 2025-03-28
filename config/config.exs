@@ -66,7 +66,7 @@ config :spark,
 config :ash_studio,
   ecto_repos: [AshStudio.Repo],
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [AshStudio.Accounts, AshStudio.CodeGen]
+  ash_domains: [AshStudio.Accounts, AshStudio.Tasks]
 
 # Configures the endpoint
 config :ash_studio, AshStudioWeb.Endpoint,
