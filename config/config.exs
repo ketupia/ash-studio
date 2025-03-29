@@ -7,9 +7,13 @@
 # General application configuration
 import Config
 
+# Configure the MCP Server
+# config :mcp_sse, :mcp_server, MCP.DefaultServer
+config :mcp_sse, :mcp_server, AshStudio.MCP.Server
+
 config :mime,
   extensions: %{"json" => "application/vnd.api+json"},
-  types: %{"application/vnd.api+json" => ["json"]}
+  types: %{"application/vnd.api+json" => ["json"], "text/event-stream" => ["sse"]}
 
 config :ash_json_api, show_public_calculations_when_loaded?: false
 

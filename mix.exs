@@ -33,6 +33,7 @@ defmodule AshStudio.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:mcp_sse, "~> 0.1"},
       {:ash, "~> 3.0"},
       {:ash_admin, "~> 0.13"},
       {:ash_authentication, "~> 4.0"},

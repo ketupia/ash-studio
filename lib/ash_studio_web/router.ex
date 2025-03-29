@@ -21,6 +21,26 @@ defmodule AshStudioWeb.Router do
     plug :set_actor, :user
   end
 
+  pipeline :sse do
+    plug :accepts, ["sse"]
+  end
+
+  pipeline :mcp_api do
+    plug :accepts, ["json"]
+    # Skip CSRF protection for MCP API requests
+    # This is necessary for external MCP clients like Cursor
+  end
+
+  scope "/" do
+    pipe_through :sse
+    get "/sse", SSE.ConnectionPlug, :call
+
+    pipe_through :mcp_api
+    post "/message", SSE.ConnectionPlug, :call
+
+    pipe_through :api
+  end
+
   scope "/", AshStudioWeb do
     pipe_through :browser
 
