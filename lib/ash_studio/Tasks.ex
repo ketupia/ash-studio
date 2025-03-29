@@ -3,7 +3,9 @@ defmodule AshStudio.Tasks do
   Services that generate command line instructions for code generation.
   """
 
-  use Ash.Domain, otp_app: :ash_studio, extensions: [AshAdmin.Domain, AshJsonApi.Domain]
+  use Ash.Domain,
+    otp_app: :ash_studio,
+    extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix]
 
   admin do
     show? true
@@ -27,7 +29,18 @@ defmodule AshStudio.Tasks do
     end
 
     resource AshStudio.Tasks.Ash.Gen.Resource do
-      define :plan_resource, action: :plan, args: [:resource_module_name, :domain_module_name]
+      define :plan_resource,
+        action: :plan,
+        args: [
+          :resource_module_name,
+          {:optional, :default_actions},
+          {:optional, :domain_module_name},
+          {:optional, :extensions},
+          {:optional, :ignore_if_exists?},
+          {:optional, :primary_key_type},
+          {:optional, :primary_key_name},
+          {:optional, :timestamps?}
+        ]
     end
   end
 end
