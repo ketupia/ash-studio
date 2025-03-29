@@ -6,6 +6,7 @@ const fs = require("fs")
 const path = require("path")
 
 module.exports = {
+  darkMode: 'class', //turn off dark mode
   content: [
     "../deps/ash_authentication_phoenix/**/*.*ex",
     "./js/**/*.js",
