@@ -11,7 +11,25 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white">
+  <body class="bg-white text-zinc-900">
+    <header class="">
+      <.navbar id="main-nav" variant="default" color="natural">
+        <:start_content>
+          <.link navigate="/" class="flex items-center space-x-3 rtl:space-x-reverse mb-5 md:mb-0">
+            <img
+              src="https://ash-hq.org/images/ash_logo_orange.svg"
+              class="hidden dark:block size-10"
+            />
+            <img src="https://ash-hq.org/images/ash_logo_orange.svg" class="dark:hidden size-10" />
+            <h1 class="text-xl font-semibold">
+              Ash Studio
+            </h1>
+          </.link>
+        </:start_content>
+        <:list><.link title="Mix Tasks" navigate="/tasks">Mix Tasks</.link></:list>
+      </.navbar>
+    </header>
+
     {@inner_content}
   </body>
 </html>
