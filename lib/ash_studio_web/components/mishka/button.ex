@@ -225,7 +225,7 @@ defmodule AshStudioWeb.Components.Button do
       </span>
       <.icon :if={icon_position(@icon, @rest) == "right"} name={@icon} class={@icon_class} />
       <.button_indicator size={@indicator_size} class={@indicator_class} {@rest} />
-      
+
     <!-- loading at the end -->
       <span :for={loading <- @loading} :if={loading[:position] == "end"}>
         {render_slot(loading)}
@@ -429,7 +429,7 @@ defmodule AshStudioWeb.Components.Button do
       </span>
       <.icon :if={icon_position(@icon, @rest) == "right"} name={@icon} class={@icon_class} />
       <.button_indicator size={@indicator_size} class={@indicator_class} {@rest} />
-      
+
     <!-- loading at the end -->
       <span :for={loading <- @loading} :if={loading[:position] == "end"}>
         {render_slot(loading)}
@@ -473,7 +473,7 @@ defmodule AshStudioWeb.Components.Button do
       </span>
       <.icon :if={icon_position(@icon, @rest) == "right"} name={@icon} />
       <.button_indicator size={@indicator_size} class={@indicator_class} {@rest} />
-      
+
     <!-- loading at the end -->
       <span :for={loading <- @loading} :if={loading[:position] == "end"}>
         {render_slot(loading)}
@@ -517,7 +517,7 @@ defmodule AshStudioWeb.Components.Button do
       </span>
       <.icon :if={icon_position(@icon, @rest) == "right"} name={@icon} />
       <.button_indicator size={@indicator_size} class={@indicator_class} {@rest} />
-      
+
     <!-- loading at the end -->
       <span :for={loading <- @loading} :if={loading[:position] == "end"}>
         {render_slot(loading)}

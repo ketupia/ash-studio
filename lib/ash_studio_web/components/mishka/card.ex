@@ -1,4 +1,4 @@
-defmodule AshStudioWeb.Components.Card do
+defmodule AshStudioWeb.Components.Mishka.Card do
   @moduledoc """
   Provides a set of card components for the `AshStudioWeb.Components.Card` project. These components
   allow for flexible and customizable card layouts, including features such as card titles,

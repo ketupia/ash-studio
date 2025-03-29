@@ -21,7 +21,7 @@ defmodule AshStudioWeb.Components.MishkaComponents do
       import AshStudioWeb.Components.Button,
         only: [button_group: 1, button: 1, input_button: 1, button_link: 1, back: 1]
 
-      import AshStudioWeb.Components.Card,
+      import AshStudioWeb.Components.Mishka.Card,
         only: [card: 1, card_title: 1, card_media: 1, card_content: 1, card_footer: 1]
 
       import AshStudioWeb.Components.Carousel,
