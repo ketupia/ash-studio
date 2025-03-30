@@ -19,7 +19,22 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
 
       change fn changeset, _ctx ->
         domain_module_name =
-          Ash.Changeset.get_argument(changeset, :domain_module_name)
+          Ash.Changeset.get_argument(changeset, :domain_module_name) || ""
+
+        module_name_parts =
+          String.split(domain_module_name, ".")
+          |> Enum.map(&Macro.camelize/1)
+
+        module_name_parts =
+          if hd(module_name_parts) == app_name() do
+            module_name_parts
+          else
+            [app_name() | module_name_parts]
+          end
+
+        domain_module_name =
+          module_name_parts
+          |> Enum.join(".")
 
         command =
           ["mix ash.gen.domain", domain_module_name]
@@ -37,5 +52,10 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
       allow_nil?: false,
       public?: true,
       description: "Command to run to generate the domain"
+  end
+
+  defp app_name() do
+    {:ok, application} = :application.get_application(__MODULE__)
+    Macro.camelize(to_string(application))
   end
 end
