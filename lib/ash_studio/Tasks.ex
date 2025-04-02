@@ -34,6 +34,7 @@ defmodule AshStudio.Tasks do
         args: [
           :resource_module_name,
           {:optional, :attribute_specs},
+          {:optional, :relationship_specs},
           {:optional, :default_actions},
           {:optional, :domain_module_name},
           {:optional, :extensions},

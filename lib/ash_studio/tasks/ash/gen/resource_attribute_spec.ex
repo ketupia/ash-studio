@@ -3,7 +3,8 @@ defmodule AshStudio.Tasks.Ash.Gen.ResourceAttributeSpec do
   an attribute for a resource
   """
   use Ash.Resource,
-    data_layer: :embedded
+    data_layer: :embedded,
+    embed_nil_values?: false
 
   attributes do
     attribute :name, :string do

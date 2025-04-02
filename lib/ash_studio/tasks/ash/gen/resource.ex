@@ -3,6 +3,7 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
   Reads resource information.
   Creates the `mix ash.gen.resource` command to create resource.
   """
+  alias AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec
   alias AshStudio.Tasks.Ash.Gen.ResourceAttributeSpec
 
   use Ash.Resource,
@@ -66,6 +67,12 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
         public? true
       end
 
+      argument :relationship_specs, {:array, ResourceRelationshipSpec} do
+        description "List of relationships to add to the resource"
+        default []
+        public? true
+      end
+
       change fn changeset, _ctx ->
         resource_module_name =
           Ash.Changeset.get_argument(changeset, :resource_module_name)
@@ -83,7 +90,8 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
             primary_key_option(changeset),
             default_action_option(changeset),
             extend_option(changeset),
-            attribute_specs(changeset)
+            attribute_specs(changeset),
+            relationship_specs(changeset)
           ]
           |> Enum.reject(&is_nil/1)
           |> Enum.join(" ")
@@ -91,6 +99,33 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
         Ash.Changeset.change_attribute(changeset, :command, command)
       end
     end
+  end
+
+  defp relationship_specs(changeset) do
+    Ash.Changeset.get_argument(changeset, :relationship_specs)
+    |> Enum.map_join(" ", fn relationship ->
+      "--relationship #{relationship.type}:#{relationship.name}:#{relationship.destination}" <>
+        if relationship.public? do
+          ":public"
+        else
+          ""
+        end <>
+        if relationship.required? and relationship.type == :belongs_to do
+          ":required"
+        else
+          ""
+        end <>
+        if relationship.primary_key? and relationship.type == :belongs_to do
+          ":primary_key"
+        else
+          ""
+        end <>
+        if relationship.sensitive? and relationship.type == :belongs_to do
+          ":sensitive"
+        else
+          ""
+        end
+    end)
   end
 
   defp attribute_specs(changeset) do
