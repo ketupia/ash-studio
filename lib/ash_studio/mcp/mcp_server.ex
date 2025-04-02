@@ -80,7 +80,7 @@ defmodule AshStudio.MCP.Server do
         "name" => "tasks.ash.gen.domain",
         "arguments" => %{"domain_module_name" => domain_module_name}
       }) do
-    AshStudio.Tasks.plan_domain(domain_module_name)
+    AshStudio.Tasks.domain_command_line(domain_module_name)
     |> case do
       {:ok, domain} ->
         {:ok,
