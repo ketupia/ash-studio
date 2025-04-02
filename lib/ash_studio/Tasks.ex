@@ -14,7 +14,7 @@ defmodule AshStudio.Tasks do
   json_api do
     routes do
       base_route "/tasks/resources", AshStudio.Tasks.Ash.Gen.Resource do
-        post :plan
+        post :command_line
       end
 
       base_route "/tasks/domains", AshStudio.Tasks.Ash.Gen.Domain do
@@ -29,10 +29,11 @@ defmodule AshStudio.Tasks do
     end
 
     resource AshStudio.Tasks.Ash.Gen.Resource do
-      define :plan_resource,
-        action: :plan,
+      define :resource_command_line,
+        action: :command_line,
         args: [
           :resource_module_name,
+          {:optional, :attribute_specs},
           {:optional, :default_actions},
           {:optional, :domain_module_name},
           {:optional, :extensions},

@@ -1,4 +1,5 @@
 defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
+  alias AshStudio.Tasks.Ash.Gen.ResourceAttributeSpec
   use AshStudioWeb, :live_view
 
   @impl true
@@ -23,24 +24,30 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
          {"Postgres", "postgres", ""}
        ]
      )
+     |> assign(attribute_type_options: Enum.sort(Keyword.keys(Ash.Type.short_names())))
      |> assign_form()}
   end
 
   defp assign_form(socket) do
     form =
-      AshStudio.Tasks.form_to_plan_resource()
+      AshStudio.Tasks.form_to_resource_command_line()
 
     socket |> assign(form: to_form(form), command: "new")
   end
 
   @impl true
   def handle_event("validate", %{"form" => params}, socket) do
-    IO.inspect(params, label: "params")
+    params =
+      update_in(params["default_actions"], fn default_actions ->
+        Enum.reject(default_actions, &(&1 == ""))
+      end)
 
-    form =
-      AshPhoenix.Form.validate(socket.assigns.form, params)
+    params =
+      update_in(params["extensions"], fn extensions ->
+        Enum.reject(extensions, &(&1 == ""))
+      end)
 
-    # |> IO.inspect(label: "form")
+    form = AshPhoenix.Form.validate(socket.assigns.form, params)
 
     command =
       cond do
@@ -60,6 +67,15 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
       end
 
     {:noreply, assign(socket, form: form, command: command)}
+  end
+
+  def handle_event("add-attribute-spec", %{"path" => path}, socket) do
+    form =
+      AshPhoenix.Form.add_form(socket.assigns.form, path,
+        params: Map.from_struct(%ResourceAttributeSpec{})
+      )
+
+    {:noreply, assign(socket, :form, form)}
   end
 
   @impl true
@@ -121,6 +137,54 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
               />
               <.input field={@form[:primary_key_name]} type="text" label="Name" phx-debounce />
             </div>
+          </.card_content>
+        </.card>
+
+        <.card padding="small">
+          <.card_title>
+            <h2>Attributes</h2>
+
+            <.button
+              type="button"
+              phx-click="add-attribute-spec"
+              phx-value-path={@form.name <> "[attribute_specs]"}
+            >
+              <.icon name="hero-plus" class="size-4" />
+            </.button>
+          </.card_title>
+          <.card_content>
+            <.inputs_for :let={attr} field={@form[:attribute_specs]}>
+              <.card padding="small" class="mb-2">
+                <.card_content>
+                  <div class="flex flex-wrap gap-2">
+                    <.input field={attr[:name]} type="text" label="Name" phx-debounce />
+                    <.input
+                      field={attr[:type]}
+                      type="select"
+                      label="Type"
+                      options={@attribute_type_options}
+                      phx-debounce
+                    />
+                    <label>
+                      <input
+                        type="checkbox"
+                        name={"#{@form.name}[_drop_attribute_specs][]"}
+                        value={attr.index}
+                        class="hidden"
+                      />
+
+                      <.icon name="hero-trash" class="size-6 text-red-700" />
+                    </label>
+                  </div>
+                  <div class="flex flex-wrap gap-4 items-center">
+                    <.input field={attr[:public?]} type="checkbox" label="Public" />
+                    <.input field={attr[:required?]} type="checkbox" label="Required" />
+                    <.input field={attr[:sensitive?]} type="checkbox" label="Sensitive" />
+                    <.input field={attr[:primary_key?]} type="checkbox" label="Primary Key" />
+                  </div>
+                </.card_content>
+              </.card>
+            </.inputs_for>
           </.card_content>
         </.card>
 
