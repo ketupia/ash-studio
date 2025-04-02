@@ -7,7 +7,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Domain.PlanLive do
   end
 
   defp assign_form(socket) do
-    form = AshStudio.Tasks.form_to_plan_domain()
+    form = AshStudio.Tasks.form_to_domain_command_line()
     socket |> assign(form: to_form(form), command: "new")
   end
 

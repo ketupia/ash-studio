@@ -18,14 +18,14 @@ defmodule AshStudio.Tasks do
       end
 
       base_route "/tasks/domains", AshStudio.Tasks.Ash.Gen.Domain do
-        post :plan
+        post :command_line
       end
     end
   end
 
   resources do
     resource AshStudio.Tasks.Ash.Gen.Domain do
-      define :plan_domain, action: :plan, args: [:domain_module_name]
+      define :domain_command_line, action: :command_line, args: [:domain_module_name]
     end
 
     resource AshStudio.Tasks.Ash.Gen.Resource do

@@ -2,6 +2,7 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
   @moduledoc """
   Creates the `mix ash.gen.resource` command to create resource.
   """
+
   use Ash.Resource,
     domain: AshStudio.Tasks,
     extensions: [AshJsonApi.Resource]
@@ -11,7 +12,7 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
   end
 
   actions do
-    create :plan do
+    create :command_line do
       argument :domain_module_name, :string,
         allow_nil?: false,
         description: "Name of the domain to generate",
@@ -21,28 +22,31 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
         domain_module_name =
           Ash.Changeset.get_argument(changeset, :domain_module_name) || ""
 
-        module_name_parts =
-          String.split(domain_module_name, ".")
-          |> Enum.map(&Macro.camelize/1)
-
-        module_name_parts =
-          if hd(module_name_parts) == app_name() do
-            module_name_parts
-          else
-            [app_name() | module_name_parts]
-          end
-
-        domain_module_name =
-          module_name_parts
-          |> Enum.join(".")
-
-        command =
-          ["mix ash.gen.domain", domain_module_name]
-          |> Enum.join(" ")
+        command = command(domain_module_name)
 
         Ash.Changeset.change_attribute(changeset, :command, command)
       end
     end
+  end
+
+  defp command(domain_module_name) do
+    module_name_parts =
+      String.split(domain_module_name, ".")
+      |> Enum.map(&Macro.camelize/1)
+
+    module_name_parts =
+      if hd(module_name_parts) == app_name() do
+        module_name_parts
+      else
+        [app_name() | module_name_parts]
+      end
+
+    domain_module_name =
+      module_name_parts
+      |> Enum.join(".")
+
+    ["mix ash.gen.domain", domain_module_name]
+    |> Enum.join(" ")
   end
 
   attributes do
