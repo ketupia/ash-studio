@@ -5,22 +5,27 @@ defmodule AshStudio.Tasks do
 
   use Ash.Domain,
     otp_app: :ash_studio,
-    extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix]
+    extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix, AshAi]
 
   admin do
     show? true
   end
 
-  json_api do
-    routes do
-      base_route "/tasks/resources", AshStudio.Tasks.Ash.Gen.Resource do
-        post :command_line
-      end
+  # json_api do
+  #   routes do
+  #     base_route "/tasks/resources", AshStudio.Tasks.Ash.Gen.Resource do
+  #       post :command_line
+  #     end
 
-      base_route "/tasks/domains", AshStudio.Tasks.Ash.Gen.Domain do
-        post :command_line
-      end
-    end
+  #     base_route "/tasks/domains", AshStudio.Tasks.Ash.Gen.Domain do
+  #       post :command_line
+  #     end
+  #   end
+  # end
+
+  tools do
+    tool :domain_command_line, AshStudio.Tasks.Ash.Gen.Domain, :command_line
+    # tool(:resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line)
   end
 
   resources do

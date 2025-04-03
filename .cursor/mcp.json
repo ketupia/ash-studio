@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "ash-studio": {
+    "Ash Studio": {
       "url": "http://localhost:4000/sse",
       "protocolVersion": "2024-11-05"
     }

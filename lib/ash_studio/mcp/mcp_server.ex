@@ -38,8 +38,60 @@ defmodule AshStudio.MCP.Server do
     end
   end
 
+  # defp encode_arguments(tool) do
+  #   attrs =
+  #     AshJsonApi.OpenApi.write_attributes(
+  #       tool.resource,
+  #       tool.action.arguments,
+  #       tool.action,
+  #       %{type: :action, route: "/"},
+  #       :json
+  #     )
+
+  #   %{
+  #     type: :object,
+  #     properties: attrs,
+  #     required:
+  #       AshJsonApi.OpenApi.required_write_attributes(
+  #         tool.resource,
+  #         tool.action.arguments,
+  #         tool.action
+  #       )
+  #   }
+  #   |> Jason.encode!()
+  #   |> Jason.decode!()
+
+  #   # |> IO.inspect(label: "arguments")
+  # end
+
   @impl true
+  # def handle_list_tools(request_id, _params) do
+  #   IO.inspect(request_id, label: "ash ai MCP list tools")
+
+  #   tools =
+  #     AshAi.exposed_tools(otp_app: :ash_studio)
+  #     |> Enum.map(fn tool ->
+  #       %{
+  #         name: tool.name,
+  #         description: tool.action.description,
+  #         inputSchema: encode_arguments(tool)
+  #       }
+  #     end)
+  #     |> IO.inspect(label: "tools")
+
+  #   {:ok,
+  #    %{
+  #      jsonrpc: "2.0",
+  #      id: request_id,
+  #      result: %{
+  #        tools: tools
+  #      }
+  #    }}
+  # end
+
   def handle_list_tools(request_id, _params) do
+    IO.inspect(request_id, label: "MCP list tools")
+
     {:ok,
      %{
        jsonrpc: "2.0",

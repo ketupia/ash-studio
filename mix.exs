@@ -33,12 +33,11 @@ defmodule AshStudio.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:mcp_sse, "~> 0.1"},
       {:ash, "~> 3.0"},
       {:ash_admin, "~> 0.13"},
+      {:ash_ai, "~> 0.1", github: "ash-project/ash_ai"},
       {:ash_authentication, "~> 4.0"},
       {:ash_authentication_phoenix, "~> 2.0"},
-      {:ash_json_api, "~> 1.0"},
       {:ash_phoenix, "~> 2.0"},
       {:ash_postgres, "~> 2.0"},
       {:bandit, "~> 1.5"},
@@ -59,6 +58,7 @@ defmodule AshStudio.MixProject do
        depth: 1},
       {:igniter, "~> 0.5", only: [:dev, :test]},
       {:jason, "~> 1.2"},
+      {:mcp_sse, "~> 0.1"},
       {:mishka_chelekom, "~> 0.0", only: [:dev]},
       {:open_api_spex, "~> 3.0"},
       {:phoenix, "~> 1.7.20"},

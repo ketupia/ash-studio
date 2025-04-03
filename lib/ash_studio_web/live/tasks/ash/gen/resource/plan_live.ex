@@ -5,11 +5,25 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    existing_resources =
-      Ash.Domain.Info.resources(AshStudio.Tasks)
+    existing_domains =
+      Application.get_env(:ash_studio, :ash_domains, [])
       |> Enum.map(&(Atom.to_string(&1) |> String.replace("Elixir.", "")))
+      |> Enum.sort()
 
-    {:ok, socket |> assign(:existing_resources, existing_resources) |> assign_form()}
+    # |> IO.inspect(label: "existing_domains")
+
+    existing_resources =
+      Application.get_env(:ash_studio, :ash_domains, [])
+      |> Enum.flat_map(&Ash.Domain.Info.resources/1)
+      |> Enum.map(&(Atom.to_string(&1) |> String.replace("Elixir.", "")))
+      |> Enum.sort()
+
+    # |> IO.inspect(label: "existing_resources")
+
+    {:ok,
+     socket
+     |> assign(existing_domains: existing_domains, existing_resources: existing_resources)
+     |> assign_form()}
   end
 
   defp assign_form(socket) do
@@ -87,7 +101,10 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
         <div class="flex flex-wrap gap-4">
           <.ignore_if_exists field={@form[:ignore_if_exists?]} />
-          <.domain_module_name field={@form[:domain_module_name]} />
+          <.domain_module_name
+            field={@form[:domain_module_name]}
+            existing_domains={@existing_domains}
+          />
         </div>
 
         <.primary_key type_field={@form[:primary_key_type]} name_field={@form[:primary_key_name]} />
@@ -367,10 +384,21 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
   end
 
   attr :field, Phoenix.HTML.FormField, required: true
+  attr :existing_domains, :list, required: true
 
   defp domain_module_name(assigns) do
     ~H"""
-    <.input label="Domain Module Name" field={@field} type="text" phx-debounce />
+    <datalist id="existing_domains">
+      <option :for={name <- @existing_domains} value={name} />
+    </datalist>
+
+    <.input
+      label="Domain Module Name"
+      field={@field}
+      type="text"
+      phx-debounce
+      list="existing_domains"
+    />
     """
   end
 
@@ -381,336 +409,4 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
     <.input label="Resource Module Name" field={@field} type="text" required phx-debounce />
     """
   end
-
-  #   def foo() do
-  #  %Phoenix.HTML.Form{
-  #       source: #AshPhoenix.Form<
-  #         resource: AshStudio.Tasks.Ash.Gen.Resource,
-  #         action: :command_line,
-  #         type: :create,
-  #         params: %{
-  #           "_unused_default_actions" => [""],
-  #           "_unused_domain_module_name" => "",
-  #           "_unused_extensions" => [""],
-  #           "_unused_ignore_if_exists?" => "",
-  #           "_unused_primary_key_name" => "",
-  #           "_unused_primary_key_type" => "",
-  #           "_unused_resource_module_name" => "",
-  #           "_unused_timestamps?" => "",
-  #           "default_actions" => [],
-  #           "domain_module_name" => "",
-  #           "extensions" => [],
-  #           "ignore_if_exists?" => "true",
-  #           "primary_key_name" => "id",
-  #           "primary_key_type" => "uuid_v4",
-  #           "relationship_specs" => %{
-  #             "0" => %{
-  #               "_form_type" => "create",
-  #               "_persistent_id" => "0",
-  #               "_touched" => "name,type,required?,destination,calculations,aggregates,__lateral_join_source__,__metadata__,__order__,__meta__,primary_key?,public?,sensitive?,__lateral_join_source__,__meta__,__metadata__,__order__,_form_type,_touched,aggregates,calculations,destination,name,primary_key?,public?,required?,sensitive?,type",
-  #               "_unused_destination" => "",
-  #               "_unused_name" => "",
-  #               "_unused_public?" => "",
-  #               "destination" => "",
-  #               "name" => "",
-  #               "public?" => "false",
-  #               "type" => "belongs_to"
-  #             }
-  #           },
-  #           "resource_module_name" => "Foo",
-  #           "timestamps?" => "true"
-  #         },
-  #         source: #Ash.Changeset<
-  #           domain: AshStudio.Tasks,
-  #           action_type: :create,
-  #           action: :command_line,
-  #           attributes: %{
-  #             command: "mix ash.gen.resource Foo --timestamps --ignore-if-exists --primary-key-uuid id"
-  #           },
-  #           relationships: %{},
-  #           arguments: %{
-  #             extensions: [],
-  #             domain_module_name: "",
-  #             resource_module_name: "Foo",
-  #             attribute_specs: [],
-  #             relationship_specs: [],
-  #             default_actions: [],
-  #             ignore_if_exists?: true,
-  #             primary_key_type: :uuid_v4,
-  #             primary_key_name: "id",
-  #             timestamps?: true
-  #           },
-  #           errors: [
-  #             %Ash.Error.Changes.Required{
-  #               field: :name,
-  #               type: :attribute,
-  #               resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #               splode: Ash.Error,
-  #               bread_crumbs: [],
-  #               vars: [],
-  #               path: [:relationship_specs, 0],
-  #               stacktrace: #Splode.Stacktrace<>,
-  #               class: :invalid
-  #             }
-  #           ],
-  #           data: #AshStudio.Tasks.Ash.Gen.Resource<
-  #             __meta__: #Ecto.Schema.Metadata<:built, "">,
-  #             id: nil,
-  #             command: nil,
-  #             aggregates: %{},
-  #             calculations: %{},
-  #             ...
-  #           >,
-  #           valid?: false
-  #         >,
-  #         name: "form",
-  #         data: nil,
-  #         form_keys: [
-  #           attribute_specs: [
-  #             type: :list,
-  #             resource: AshStudio.Tasks.Ash.Gen.ResourceAttributeSpec,
-  #             create_action: :create,
-  #             update_action: :update,
-  #             embed?: true,
-  #             data: #Function<40.101098749/1 in AshPhoenix.Form.Auto.embedded/3>,
-  #             forms: []
-  #           ],
-  #           relationship_specs: [
-  #             type: :list,
-  #             resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #             create_action: :create,
-  #             update_action: :update,
-  #             embed?: true,
-  #             data: #Function<40.101098749/1 in AshPhoenix.Form.Auto.embedded/3>,
-  #             forms: []
-  #           ]
-  #         ],
-  #         forms: %{
-  #           relationship_specs: [
-  #             #AshPhoenix.Form<
-  #               resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #               action: :create,
-  #               type: :create,
-  #               params: %{
-  #                 "_form_type" => "create",
-  #                 "_persistent_id" => "0",
-  #                 "_touched" => "name,type,required?,destination,calculations,aggregates,__lateral_join_source__,__metadata__,__order__,__meta__,primary_key?,public?,sensitive?,__lateral_join_source__,__meta__,__metadata__,__order__,_form_type,_touched,aggregates,calculations,destination,name,primary_key?,public?,required?,sensitive?,type",
-  #                 "_unused_destination" => "",
-  #                 "_unused_name" => "",
-  #                 "_unused_public?" => "",
-  #                 "destination" => "",
-  #                 "name" => "",
-  #                 "public?" => "false",
-  #                 "type" => "belongs_to"
-  #               },
-  #               source: #Ash.Changeset<
-  #                 domain: AshStudio.Tasks,
-  #                 action_type: :create,
-  #                 action: :create,
-  #                 attributes: %{
-  #                   name: nil,
-  #                   type: :belongs_to,
-  #                   required?: false,
-  #                   destination: nil,
-  #                   primary_key?: false,
-  #                   public?: false,
-  #                   sensitive?: false
-  #                 },
-  #                 relationships: %{},
-  #                 errors: [
-  #                   %Ash.Error.Changes.Required{
-  #                     field: :destination,
-  #                     type: :attribute,
-  #                     resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #                     splode: Ash.Error,
-  #                     bread_crumbs: [],
-  #                     vars: [],
-  #                     path: [],
-  #                     stacktrace: #Splode.Stacktrace<>,
-  #                     class: :invalid
-  #                   },
-  #                   %Ash.Error.Changes.Required{
-  #                     field: :name,
-  #                     type: :attribute,
-  #                     resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #                     splode: Ash.Error,
-  #                     bread_crumbs: [],
-  #                     vars: [],
-  #                     path: [],
-  #                     stacktrace: #Splode.Stacktrace<>,
-  #                     class: :invalid
-  #                   },
-  #                   %Ash.Error.Changes.Required{
-  #                     field: :name,
-  #                     type: :attribute,
-  #                     resource: AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec,
-  #                     splode: Ash.Error,
-  #                     bread_crumbs: [],
-  #                     vars: [],
-  #                     path: [],
-  #                     stacktrace: #Splode.Stacktrace<>,
-  #                     class: :invalid
-  #                   }
-  #                 ],
-  #                 data: #AshStudio.Tasks.Ash.Gen.ResourceRelationshipSpec<
-  #                   __meta__: #Ecto.Schema.Metadata<:built, "">,
-  #                   name: nil,
-  #                   destination: nil,
-  #                   type: :has_many,
-  #                   public?: false,
-  #                   required?: false,
-  #                   primary_key?: false,
-  #                   sensitive?: false,
-  #                   aggregates: %{},
-  #                   calculations: %{},
-  #                   ...
-  #                 >,
-  #                 valid?: false
-  #               >,
-  #               name: "form[relationship_specs][0]",
-  #               data: nil,
-  #               form_keys: [],
-  #               forms: %{},
-  #               domain: AshStudio.Tasks,
-  #               method: "post",
-  #               submit_errors: nil,
-  #               id: "form_relationship_specs_0",
-  #               transform_errors: nil,
-  #               original_data: nil,
-  #               transform_params: nil,
-  #               prepare_params: nil,
-  #               prepare_source: nil,
-  #               raw_params: %{
-  #                 "_form_type" => "create",
-  #                 "_persistent_id" => "0",
-  #                 "_touched" => "name,type,required?,destination,calculations,aggregates,__lateral_join_source__,__metadata__,__order__,__meta__,primary_key?,public?,sensitive?,__lateral_join_source__,__meta__,__metadata__,__order__,_form_type,_touched,aggregates,calculations,destination,name,primary_key?,public?,required?,sensitive?,type",
-  #                 "_unused_destination" => "",
-  #                 "_unused_name" => "",
-  #                 "_unused_public?" => "",
-  #                 "destination" => "",
-  #                 "name" => "",
-  #                 "public?" => "false",
-  #                 "type" => "belongs_to"
-  #               },
-  #               warn_on_unhandled_errors?: true,
-  #               any_removed?: false,
-  #               added?: true,
-  #               changed?: true,
-  #               touched_forms: MapSet.new([:name, :type, :required?, :destination,
-  #                :calculations, :aggregates, :__lateral_join_source__, :__metadata__,
-  #                :__order__, :__meta__, :primary_key?, :public?, :sensitive?,
-  #                "__lateral_join_source__", ...]),
-  #               valid?: false,
-  #               errors: true,
-  #               submitted_once?: false,
-  #               just_submitted?: false,
-  #               ...
-  #             >
-  #           ]
-  #         },
-  #         domain: AshStudio.Tasks,
-  #         method: "post",
-  #         submit_errors: nil,
-  #         id: "form",
-  #         transform_errors: nil,
-  #         original_data: nil,
-  #         transform_params: nil,
-  #         prepare_params: nil,
-  #         prepare_source: nil,
-  #         raw_params: %{
-  #           "_unused_default_actions" => [""],
-  #           "_unused_domain_module_name" => "",
-  #           "_unused_extensions" => [""],
-  #           "_unused_ignore_if_exists?" => "",
-  #           "_unused_primary_key_name" => "",
-  #           "_unused_primary_key_type" => "",
-  #           "_unused_resource_module_name" => "",
-  #           "_unused_timestamps?" => "",
-  #           "default_actions" => [],
-  #           "domain_module_name" => "",
-  #           "extensions" => [],
-  #           "ignore_if_exists?" => "true",
-  #           "primary_key_name" => "id",
-  #           "primary_key_type" => "uuid_v4",
-  #           "relationship_specs" => %{
-  #             "0" => %{
-  #               "_form_type" => "create",
-  #               "_persistent_id" => "0",
-  #               "_touched" => "name,type,required?,destination,calculations,aggregates,__lateral_join_source__,__metadata__,__order__,__meta__,primary_key?,public?,sensitive?,__lateral_join_source__,__meta__,__metadata__,__order__,_form_type,_touched,aggregates,calculations,destination,name,primary_key?,public?,required?,sensitive?,type",
-  #               "_unused_destination" => "",
-  #               "_unused_name" => "",
-  #               "_unused_public?" => "",
-  #               "destination" => "",
-  #               "name" => "",
-  #               "public?" => "false",
-  #               "type" => "belongs_to"
-  #             }
-  #           },
-  #           "resource_module_name" => "Foo",
-  #           "timestamps?" => "true"
-  #         },
-  #         warn_on_unhandled_errors?: true,
-  #         any_removed?: false,
-  #         added?: false,
-  #         changed?: true,
-  #         touched_forms: MapSet.new(["_form_type", "_touched",
-  #          "_unused_default_actions", "_unused_domain_module_name",
-  #          "_unused_extensions", "_unused_ignore_if_exists?",
-  #          "_unused_primary_key_name", "_unused_primary_key_type",
-  #          "_unused_resource_module_name", "_unused_timestamps?", "default_actions",
-  #          "domain_module_name", "extensions", "ignore_if_exists?",
-  #          "primary_key_name", "primary_key_type", "relationship_specs",
-  #          "resource_module_name", "timestamps?"]),
-  #         valid?: false,
-  #         errors: true,
-  #         submitted_once?: false,
-  #         just_submitted?: false,
-  #         ...
-  #       >,
-  #       impl: Phoenix.HTML.FormData.AshPhoenix.Form,
-  #       id: "form",
-  #       name: "form",
-  #       data: nil,
-  #       action: nil,
-  #       hidden: [
-  #         _touched: "_form_type,_touched,_unused_default_actions,_unused_domain_module_name,_unused_extensions,_unused_ignore_if_exists?,_unused_primary_key_name,_unused_primary_key_type,_unused_resource_module_name,_unused_timestamps?,default_actions,domain_module_name,extensions,ignore_if_exists?,primary_key_name,primary_key_type,relationship_specs,resource_module_name,timestamps?",
-  #         _form_type: "create"
-  #       ],
-  #       params: %{
-  #         "_unused_default_actions" => [""],
-  #         "_unused_domain_module_name" => "",
-  #         "_unused_extensions" => [""],
-  #         "_unused_ignore_if_exists?" => "",
-  #         "_unused_primary_key_name" => "",
-  #         "_unused_primary_key_type" => "",
-  #         "_unused_resource_module_name" => "",
-  #         "_unused_timestamps?" => "",
-  #         "default_actions" => [],
-  #         "domain_module_name" => "",
-  #         "extensions" => [],
-  #         "ignore_if_exists?" => "true",
-  #         "primary_key_name" => "id",
-  #         "primary_key_type" => "uuid_v4",
-  #         "relationship_specs" => %{
-  #           "0" => %{
-  #             "_form_type" => "create",
-  #             "_persistent_id" => "0",
-  #             "_touched" => "name,type,required?,destination,calculations,aggregates,__lateral_join_source__,__metadata__,__order__,__meta__,primary_key?,public?,sensitive?,__lateral_join_source__,__meta__,__metadata__,__order__,_form_type,_touched,aggregates,calculations,destination,name,primary_key?,public?,required?,sensitive?,type",
-  #             "_unused_destination" => "",
-  #             "_unused_name" => "",
-  #             "_unused_public?" => "",
-  #             "destination" => "",
-  #             "name" => "",
-  #             "public?" => "false",
-  #             "type" => "belongs_to"
-  #           }
-  #         },
-  #         "resource_module_name" => "Foo",
-  #         "timestamps?" => "true"
-  #       },
-  #       errors: [],
-  #       options: [method: "post"],
-  #       index: nil
-  #     }
-  #   end
 end
