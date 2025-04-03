@@ -13,6 +13,8 @@ defmodule AshStudio.Tasks.Ash.Gen.Domain do
 
   actions do
     create :command_line do
+      description "Creates the command to generate an Ash Domain"
+
       argument :domain_module_name, :string,
         allow_nil?: false,
         description: "Name of the domain to generate",
