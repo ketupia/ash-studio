@@ -1,6 +1,6 @@
 defmodule AshStudio.Tasks.Ash.Gen.Domain do
   @moduledoc """
-  Creates the `mix ash.gen.resource` command to create resource.
+  Creates the `mix ash.gen.domain` command to create domain.
   """
 
   use Ash.Resource,

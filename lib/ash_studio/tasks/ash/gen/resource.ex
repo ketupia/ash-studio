@@ -20,8 +20,7 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
         allow_nil?: false,
         description: "Name of the resource to generate",
         public?: true,
-        constraints: [trim?: true],
-        default: "Foo"
+        constraints: [trim?: true]
 
       argument :domain_module_name, :string,
         allow_nil?: false,

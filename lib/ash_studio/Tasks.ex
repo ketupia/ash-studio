@@ -24,11 +24,20 @@ defmodule AshStudio.Tasks do
   # end
 
   tools do
+    tool :codegen_check, AshStudio.Tasks.Ash.Codegen, :check
+    tool :codegen_dry_run, AshStudio.Tasks.Ash.Codegen, :dry_run
+    tool :codegen_plan, AshStudio.Tasks.Ash.Codegen, :plan
     tool :domain_command_line, AshStudio.Tasks.Ash.Gen.Domain, :command_line
-    # tool(:resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line)
+    # tool :resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line
   end
 
   resources do
+    resource AshStudio.Tasks.Ash.Codegen do
+      define :codegen_check, action: :check
+      define :codegen_dry_run, action: :dry_run
+      define :codegen_plan, action: :plan, args: [:migration_file_name]
+    end
+
     resource AshStudio.Tasks.Ash.Gen.Domain do
       define :domain_command_line, action: :command_line, args: [:domain_module_name]
     end
