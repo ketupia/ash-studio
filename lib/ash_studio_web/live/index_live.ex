@@ -1,4 +1,5 @@
 defmodule AshStudioWeb.IndexLive do
+  alias Phoenix.HTML.Form
   alias AshStudio.ChatModelFactory
   alias LangChain.Chains.LLMChain
   use AshStudioWeb, :live_view
@@ -68,7 +69,6 @@ defmodule AshStudioWeb.IndexLive do
       |> LLMChain.run(mode: :while_needs_response)
       |> case do
         {:ok, updated_chain} ->
-          IO.inspect(updated_chain.messages, label: "updated_chain messages")
           assign(socket, llmchain: updated_chain)
 
         {:error, _llmchain, error} ->
@@ -83,21 +83,29 @@ defmodule AshStudioWeb.IndexLive do
   def render(assigns) do
     ~H"""
     <div class="flex flex-row gap-4">
-      <.chat_interface llmchain={@llmchain} form={@form} />
-      <.card padding="small" variant="shadow" color="neutral">
-        <.card_title>Tools</.card_title>
-        <.card_content>
-          <.ash_gen_menu />
-          <.ash_codegen_menu />
-        </.card_content>
-      </.card>
+      <div class="flex-auto space-y-8">
+        <.chat_interface llmchain={@llmchain} form={@form} />
+      </div>
+      <div class="flex-1 space-y-8">
+        <.card padding="small" variant="shadow" color="neutral">
+          <.card_title>Tools</.card_title>
+          <.card_content>
+            <.ash_gen_menu />
+            <.ash_codegen_menu />
+          </.card_content>
+        </.card>
+        <.chat_suggestions />
+      </div>
     </div>
     """
   end
 
+  attr :form, Form, required: true
+  attr :llmchain, LLMChain, required: true
+
   defp chat_interface(assigns) do
     ~H"""
-    <.card padding="medium" variant="outline" class="flex-1">
+    <.card padding="medium" variant="default" color="natural">
       <.card_title>Ash AI Chat</.card_title>
       <.card_content>
         <.chat
@@ -142,6 +150,38 @@ defmodule AshStudioWeb.IndexLive do
         </.form_wrapper>
       </.card_footer>
     </.card>
+    """
+  end
+
+  defp chat_suggestions(assigns) do
+    assigns =
+      assign(assigns,
+        suggestions: [
+          "What is the command to create a domain named Tunez?",
+          "What is the command to create a migration named add album?"
+        ],
+        failing_suggestions: [
+          "What is the command to create a resource named Artist in the Music domain? Artists use a UUID-v4 for their ID. They have a name - it's required. They have a biography - it's optional. The record should include timestamps."
+        ]
+      )
+
+    ~H"""
+    <div class="flex flex-wrap gap-4">
+      <div
+        :for={{suggestion, index} <- Enum.with_index(@suggestions)}
+        class="max-w-[24ch]"
+        phx-hook="CopyToClipboardHook"
+        data-target={"suggestion_#{index}"}
+        id={"suggestion_#{index}"}
+      >
+        <.icon name="hero-clipboard" class="size-6" />
+        {suggestion}
+      </div>
+      <div :for={suggestion <- @failing_suggestions} class="max-w-[24ch] text-red-500">
+        <.icon name="hero-x-mark" class="size-6" />
+        {suggestion}
+      </div>
+    </div>
     """
   end
 
