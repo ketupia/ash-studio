@@ -82,20 +82,22 @@ defmodule AshStudioWeb.IndexLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="flex flex-row gap-4">
-      <div class="flex-auto space-y-8">
-        <.chat_interface llmchain={@llmchain} form={@form} />
-      </div>
-      <div class="flex-1 space-y-8">
-        <.card padding="small" variant="shadow" color="neutral">
-          <.card_title title="Tasks" />
-          <.card_content>
-            <.p color="silver">Forms for mix tasks</.p>
-            <.ash_gen_menu />
-            <.ash_codegen_menu />
-          </.card_content>
-        </.card>
-        <.chat_suggestions />
+    <div class="space-y-4">
+      <div class="flex flex-row gap-4">
+        <div class="flex-auto space-y-8">
+          <.chat_interface llmchain={@llmchain} form={@form} />
+        </div>
+        <div class="flex-1 space-y-8">
+          <.card padding="small" variant="shadow" color="neutral">
+            <.card_title title="Tasks" />
+            <.card_content>
+              <.p color="silver">Forms for mix tasks</.p>
+              <.ash_gen_menu />
+              <.ash_codegen_menu />
+            </.card_content>
+          </.card>
+          <.chat_suggestions />
+        </div>
       </div>
     </div>
     """

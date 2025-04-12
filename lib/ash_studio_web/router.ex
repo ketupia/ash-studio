@@ -57,6 +57,7 @@ defmodule AshStudioWeb.Router do
       # on_mount {AshStudioWeb.LiveUserAuth, :live_no_user}
 
       live "/", IndexLive
+      live "/about", AboutLive
 
       live "/tasks", Tasks.IndexLive
       live "/tasks/ash/gen/domain", Tasks.Ash.Gen.Domain.PlanLive
