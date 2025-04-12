@@ -17,13 +17,13 @@ defmodule AshStudio.ChatModelFactory do
     })
   end
 
-  defp google() do
-    gemini_api_key = System.get_env("gemini_api_key")
+  # defp google() do
+  #   gemini_api_key = System.get_env("gemini_api_key")
 
-    LangChain.ChatModels.ChatGoogleAI.new!(%{
-      model: "gemini-2.0-flash",
-      stream: true,
-      api_key: gemini_api_key
-    })
-  end
+  #   LangChain.ChatModels.ChatGoogleAI.new!(%{
+  #     model: "gemini-2.0-flash",
+  #     stream: true,
+  #     api_key: gemini_api_key
+  #   })
+  # end
 end
