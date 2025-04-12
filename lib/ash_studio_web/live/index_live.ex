@@ -149,7 +149,7 @@ defmodule AshStudioWeb.IndexLive do
     ~H"""
     <.menu space="small">
       <li>
-        <.button_link variant="shadow" navigate="/tasks/ash/codegen">
+        <.button_link variant="outline" color="natural" navigate="/tasks/ash/codegen">
           ash.codegen
         </.button_link>
       </li>
@@ -161,13 +161,13 @@ defmodule AshStudioWeb.IndexLive do
     ~H"""
     <.menu space="small">
       <li>
-        <.button_link variant="shadow" navigate="/tasks/ash/gen/domain">
+        <.button_link variant="outline" color="natural" navigate="/tasks/ash/gen/domain">
           ash.gen.domain
         </.button_link>
       </li>
 
       <li>
-        <.button_link variant="shadow" navigate="/tasks/ash/gen/resource">
+        <.button_link variant="outline" color="primary" navigate="/tasks/ash/gen/resource">
           ash.gen.resource
         </.button_link>
       </li>
