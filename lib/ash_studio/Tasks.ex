@@ -28,7 +28,7 @@ defmodule AshStudio.Tasks do
     tool :codegen_dry_run, AshStudio.Tasks.Ash.Codegen, :dry_run
     tool :codegen_command_line, AshStudio.Tasks.Ash.Codegen, :command_line
     tool :domain_command_line, AshStudio.Tasks.Ash.Gen.Domain, :command_line
-    # tool :resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line
+    tool :resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line
     # tool :run_system_command, AshStudio.Tasks.SystemCommandResult, :run
   end
 
