@@ -1,27 +1,55 @@
-defmodule AshStudioWeb.Tasks.IndexLive do
+defmodule AshStudioWeb.IndexLive do
+  alias AshStudio.ChatModelFactory
   alias LangChain.Chains.LLMChain
   use AshStudioWeb, :live_view
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign_new_chat() |> assign_chat_form()}
+    {:ok,
+     socket
+     |> assign_new_chat()
+     |> assign_chat_form()
+     |> assign_old_chat_messages()}
   end
 
   defp assign_new_chat(socket) do
-    gemini_api_key = System.get_env("gemini_api_key")
-
     llmchain =
       %{
-        llm:
-          LangChain.ChatModels.ChatGoogleAI.new!(%{
-            model: "gemini-2.0-flash",
-            stream: true,
-            api_key: gemini_api_key
-          }),
+        llm: ChatModelFactory.new(),
         verbose?: true
       }
       |> LLMChain.new!()
       |> AshAi.setup_ash_ai(otp_app: :ash_studio)
+
+    assign(socket, llmchain: llmchain)
+  end
+
+  defp assign_old_chat_messages(socket) do
+    llmchain =
+      Map.put(socket.assigns.llmchain, :messages, [
+        %LangChain.Message{
+          content: "Your name is?",
+          processed_content: nil,
+          index: nil,
+          status: :complete,
+          role: :user,
+          name: nil,
+          tool_calls: [],
+          tool_results: nil,
+          metadata: nil
+        },
+        %LangChain.Message{
+          content: "I am known as Assistant. How can I help you today?",
+          processed_content: nil,
+          index: 0,
+          status: :complete,
+          role: :assistant,
+          name: nil,
+          tool_calls: [],
+          tool_results: nil,
+          metadata: nil
+        }
+      ])
 
     assign(socket, llmchain: llmchain)
   end
@@ -40,6 +68,7 @@ defmodule AshStudioWeb.Tasks.IndexLive do
       |> LLMChain.run(mode: :while_needs_response)
       |> case do
         {:ok, updated_chain} ->
+          IO.inspect(updated_chain.messages, label: "updated_chain messages")
           assign(socket, llmchain: updated_chain)
 
         {:error, _llmchain, error} ->
@@ -80,11 +109,11 @@ defmodule AshStudioWeb.Tasks.IndexLive do
               <span :if={message.tool_results != nil}>
                 Executed {Enum.map_join(message.tool_results, ",", & &1.name)}
               </span>
-              <:meta>
+              <%!-- <:meta>
                 <div class="flex justify-between items-center">
                   <div>{message.role}</div>
                 </div>
-              </:meta>
+              </:meta> --%>
             </.chat_section>
           </.chat>
         </.card_content>
@@ -98,18 +127,46 @@ defmodule AshStudioWeb.Tasks.IndexLive do
         </.card_footer>
       </.card>
 
-      <.menu space="small">
-        <li>
-          <.button_link variant="shadow" navigate="/tasks/ash/gen/domain">Domain</.button_link>
-        </li>
-
-        <li>
-          <.button_link variant="shadow" navigate="/tasks/ash/gen/resource">Resource</.button_link>
-        </li>
-      </.menu>
+      <.card padding="small" variant="shadow" color="neutral">
+        <.card_title>Tools</.card_title>
+        <.card_content>
+          <.ash_gen_menu />
+          <.ash_codegen_menu />
+        </.card_content>
+      </.card>
     </div>
 
     <%!-- <pre>{inspect(@llmchain, pretty: true)}</pre> --%>
+    """
+  end
+
+  defp ash_codegen_menu(assigns) do
+    ~H"""
+    <.menu space="small">
+      <li>
+        <.button_link variant="shadow" navigate="/tasks/ash/codegen">
+          ash.codegen
+        </.button_link>
+      </li>
+    </.menu>
+    """
+  end
+
+  defp ash_gen_menu(assigns) do
+    ~H"""
+    <.menu space="small">
+      <li>
+        <.button_link variant="shadow" navigate="/tasks/ash/gen/domain">
+          ash.gen.domain
+        </.button_link>
+      </li>
+
+      <li>
+        <.button_link variant="shadow" navigate="/tasks/ash/gen/resource">
+          ash.gen.resource
+        </.button_link>
+      </li>
+    </.menu>
     """
   end
 end

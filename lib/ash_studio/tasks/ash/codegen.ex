@@ -23,7 +23,7 @@ defmodule AshStudio.Tasks.Ash.Codegen do
       end
     end
 
-    create :plan do
+    create :command_line do
       description "Plans the codegen command to runs all codegen tasks for any extension on any resource/domain in your application."
 
       argument :migration_file_name, :string,
@@ -36,6 +36,11 @@ defmodule AshStudio.Tasks.Ash.Codegen do
       change fn changeset, _ctx ->
         migration_file_name =
           Ash.Changeset.get_argument(changeset, :migration_file_name)
+          |> String.split()
+          |> Enum.map(&String.trim/1)
+          |> Enum.reject(&(String.length(&1) == 0))
+          |> Enum.join("_")
+          |> String.downcase()
 
         Ash.Changeset.change_attribute(
           changeset,

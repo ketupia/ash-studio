@@ -56,9 +56,12 @@ defmodule AshStudioWeb.Router do
       # If an authenticated user must *not* be present:
       # on_mount {AshStudioWeb.LiveUserAuth, :live_no_user}
 
+      live "/", IndexLive
+
       live "/tasks", Tasks.IndexLive
       live "/tasks/ash/gen/domain", Tasks.Ash.Gen.Domain.PlanLive
       live "/tasks/ash/gen/resource", Tasks.Ash.Gen.Resource.PlanLive
+      live "/tasks/ash/codegen", Tasks.Ash.Codegen.PlanLive
     end
   end
 
@@ -81,7 +84,7 @@ defmodule AshStudioWeb.Router do
   scope "/", AshStudioWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
     auth_routes AuthController, AshStudio.Accounts.User, path: "/auth"
     sign_out_route AuthController
 

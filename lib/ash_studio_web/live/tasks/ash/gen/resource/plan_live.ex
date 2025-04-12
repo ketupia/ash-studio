@@ -30,7 +30,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
     form =
       AshStudio.Tasks.form_to_resource_command_line()
 
-    socket |> assign(form: to_form(form), command: "new")
+    socket |> assign(form: to_form(form), command: "")
   end
 
   @impl true
@@ -89,53 +89,62 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
   def render(assigns) do
     ~H"""
     <div class="space-y-4">
-      <.card variant="transparent">
+      <.card variant="transparent" padding="medium">
         <.card_title title="mix ash.gen.resource" />
         <.card_content>
           Generate the command line to create an Ash Resource
+          <.form_wrapper for={@form} phx-change="validate" phx-submit="validate" space="small">
+            <.resource_module_name field={@form[:resource_module_name]} />
+
+            <div class="flex flex-wrap gap-4">
+              <.ignore_if_exists field={@form[:ignore_if_exists?]} />
+              <.domain_module_name
+                field={@form[:domain_module_name]}
+                existing_domains={@existing_domains}
+              />
+            </div>
+
+            <.primary_key type_field={@form[:primary_key_type]} name_field={@form[:primary_key_name]} />
+            <.include_timestamps field={@form[:timestamps?]} />
+
+            <.attributes field={@form[:attribute_specs]} form_name={@form.name} />
+            <.relationships
+              field={@form[:relationship_specs]}
+              form_name={@form.name}
+              existing_resources={@existing_resources}
+            />
+
+            <.default_actions field={@form[:default_actions]} />
+
+            <.extensions field={@form[:extensions]} />
+
+            <:actions>
+              <.button>Submit</.button>
+            </:actions>
+          </.form_wrapper>
         </.card_content>
-      </.card>
 
-      <.form_wrapper for={@form} phx-change="validate" phx-submit="validate" space="small">
-        <.resource_module_name field={@form[:resource_module_name]} />
-
-        <div class="flex flex-wrap gap-4">
-          <.ignore_if_exists field={@form[:ignore_if_exists?]} />
-          <.domain_module_name
-            field={@form[:domain_module_name]}
-            existing_domains={@existing_domains}
+        <.card_footer>
+          <.button
+            disabled={@command == ""}
+            phx-hook="CopyToClipboardHook"
+            data-target="command"
+            id="copy-command-button"
+            variant="default"
+            color="primary"
+          >
+            <.icon name="hero-clipboard" class="size-6" />
+          </.button>
+          <span id="command">{@command}</span>
+          <.skeleton
+            :if={@command == ""}
+            class="inline-block"
+            color="base"
+            height="large"
+            rounded="large"
+            width="w-24 md:w-72"
           />
-        </div>
-
-        <.primary_key type_field={@form[:primary_key_type]} name_field={@form[:primary_key_name]} />
-        <.include_timestamps field={@form[:timestamps?]} />
-
-        <.attributes field={@form[:attribute_specs]} form_name={@form.name} />
-        <.relationships
-          field={@form[:relationship_specs]}
-          form_name={@form.name}
-          existing_resources={@existing_resources}
-        />
-
-        <.default_actions field={@form[:default_actions]} />
-
-        <.extensions field={@form[:extensions]} />
-
-        <:actions>
-          <.button>Submit</.button>
-        </:actions>
-      </.form_wrapper>
-
-      <.divider type="dotted">
-        <%!-- <:icon name="hero-bolt" class="size-4" /> --%>
-        <:icon name="hero-beaker" class="size-4" />
-      </.divider>
-
-      <h2>Command</h2>
-      <.card variant="shadow" color="white" rounded="large">
-        <.card_content padding="medium">
-          {@command}
-        </.card_content>
+        </.card_footer>
       </.card>
     </div>
     """
