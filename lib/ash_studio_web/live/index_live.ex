@@ -83,54 +83,7 @@ defmodule AshStudioWeb.IndexLive do
   def render(assigns) do
     ~H"""
     <div class="flex flex-row gap-4">
-      <.card padding="medium" variant="outline" class="flex-1">
-        <.card_title>Ash AI Chat</.card_title>
-        <.card_content>
-          <.chat
-            :for={message <- @llmchain.messages}
-            variant={(is_nil(message.content) && "transparent") || "shadow"}
-            position={(message.role in [:tool, :assistant] && "flipped") || "normal"}
-            color={
-              (message.role == :user && "primary") || (message.role == :assistant && "secondary") ||
-                "info"
-            }
-          >
-            <%!-- Avatar --%>
-            <.icon :if={message.role == :user} name="hero-user" class="size-6" />
-            <.icon :if={message.role == :tool} name="hero-wrench" class="size-6" />
-            <span :if={message.role == :assistant} class="text-3xl">🤖</span>
-            <%!-- <.icon :if={message.role == :assistant} name="hero-beaker" class="size-6" /> --%>
-
-            <.chat_section>
-              <span :if={message.content}>{message.content}</span>
-              <span :if={Enum.any?(message.tool_calls)}>
-                Called {Enum.map_join(message.tool_calls, ",", & &1.name)}
-              </span>
-              <span :if={message.tool_results != nil}>
-                Executed {Enum.map_join(message.tool_results, ",", & &1.name)}
-              </span>
-              <%!-- <:meta>
-                <div class="flex justify-between items-center">
-                  <div>{message.role}</div>
-                </div>
-              </:meta> --%>
-            </.chat_section>
-          </.chat>
-        </.card_content>
-        <.card_footer>
-          <.form_wrapper for={@form} phx-submit="send" space="small" id="my_form">
-            <.textarea_field
-              field={@form[:message]}
-              phx-keydown={JS.dispatch("submit", to: "#my_form")}
-              phx-key="Enter"
-            />
-            <:actions>
-              <.button type="submit" phx-disabled_with="Sending...">Send</.button>
-            </:actions>
-          </.form_wrapper>
-        </.card_footer>
-      </.card>
-
+      <.chat_interface llmchain={@llmchain} form={@form} />
       <.card padding="small" variant="shadow" color="neutral">
         <.card_title>Tools</.card_title>
         <.card_content>
@@ -139,13 +92,56 @@ defmodule AshStudioWeb.IndexLive do
         </.card_content>
       </.card>
     </div>
-
-    <%!-- <pre>{inspect(@llmchain, pretty: true)}</pre> --%>
     """
   end
 
   defp chat_interface(assigns) do
     ~H"""
+    <.card padding="medium" variant="outline" class="flex-1">
+      <.card_title>Ash AI Chat</.card_title>
+      <.card_content>
+        <.chat
+          :for={message <- @llmchain.messages}
+          variant={(is_nil(message.content) && "transparent") || "shadow"}
+          position={(message.role in [:tool, :assistant] && "flipped") || "normal"}
+          color={
+            (message.role == :user && "primary") || (message.role == :assistant && "secondary") ||
+              "info"
+          }
+          space="small"
+        >
+          <%!-- Avatar --%>
+          <.icon :if={message.role == :user} name="hero-user" class="size-6" />
+          <.icon :if={message.role == :tool} name="hero-wrench" class="size-6" />
+          <span :if={message.role == :assistant} class="text-3xl">🤖</span>
+
+          <.chat_section>
+            <span :if={message.content}>{message.content}</span>
+            <span :if={Enum.any?(message.tool_calls)}>
+              Called {Enum.map_join(message.tool_calls, ",", & &1.name)}
+            </span>
+            <span :if={message.tool_results != nil}>
+              Executed {Enum.map_join(message.tool_results, ",", & &1.name)}
+            </span>
+          </.chat_section>
+        </.chat>
+      </.card_content>
+      <.card_footer>
+        <.form_wrapper for={@form} phx-submit="send" space="small" id="my_form">
+          <.textarea_field
+            field={@form[:message]}
+            phx-keydown={JS.dispatch("submit", to: "#my_form")}
+            phx-key="Enter"
+            required
+          />
+          <:actions>
+            <.button type="submit" phx-disabled_with="Sending...">
+              Send
+            </.button>
+          </:actions>
+        </.form_wrapper>
+      </.card_footer>
+    </.card>
     """
   end
 
