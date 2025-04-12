@@ -118,10 +118,14 @@ defmodule AshStudioWeb.IndexLive do
           </.chat>
         </.card_content>
         <.card_footer>
-          <.form_wrapper for={@form} phx-submit="send" space="small">
-            <.textarea_field field={@form[:message]} />
+          <.form_wrapper for={@form} phx-submit="send" space="small" id="my_form">
+            <.textarea_field
+              field={@form[:message]}
+              phx-keydown={JS.dispatch("submit", to: "#my_form")}
+              phx-key="Enter"
+            />
             <:actions>
-              <.button type="submit">Send</.button>
+              <.button type="submit" phx-disabled_with="Sending...">Send</.button>
             </:actions>
           </.form_wrapper>
         </.card_footer>
@@ -137,6 +141,11 @@ defmodule AshStudioWeb.IndexLive do
     </div>
 
     <%!-- <pre>{inspect(@llmchain, pretty: true)}</pre> --%>
+    """
+  end
+
+  defp chat_interface(assigns) do
+    ~H"""
     """
   end
 
