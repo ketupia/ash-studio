@@ -88,8 +88,9 @@ defmodule AshStudioWeb.IndexLive do
       </div>
       <div class="flex-1 space-y-8">
         <.card padding="small" variant="shadow" color="neutral">
-          <.card_title>Tools</.card_title>
+          <.card_title title="Tasks" />
           <.card_content>
+            <.p color="silver">Forms for mix tasks</.p>
             <.ash_gen_menu />
             <.ash_codegen_menu />
           </.card_content>
@@ -167,6 +168,7 @@ defmodule AshStudioWeb.IndexLive do
 
     ~H"""
     <div class="flex flex-wrap gap-4">
+      <.p color="silver"><.icon name="hero-beaker" class="size-6" /> Suggestions</.p>
       <div
         :for={{suggestion, index} <- Enum.with_index(@suggestions)}
         class="max-w-[24ch]"

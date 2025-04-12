@@ -18,7 +18,7 @@ defmodule AshStudioWeb.Tasks.Ash.Codegen.PlanLive do
       <.card variant="transparent" padding="medium">
         <.card_title title="mix ash.codegen" />
         <.card_content>
-          Generate the command line to create a migration file
+          <.p color="silver">Generate the command line to create a migration file</.p>
           <.form_wrapper for={@form} phx-change="validate" padding="small" space="small">
             <.input
               field={@form[:migration_file_name]}

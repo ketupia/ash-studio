@@ -18,8 +18,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Domain.PlanLive do
       <.card variant="transparent" padding="medium">
         <.card_title title="mix ash.gen.domain" />
         <.card_content>
-          Generate the command line to create an Ash Domain
-          <.form_wrapper for={@form} phx-change="validate" space="small">
+          <.p color="silver">Generate the command line to create an Ash Domain</.p>
+          <.form_wrapper for={@form} phx-change="validate" padding="small" space="small">
             <.input
               field={@form[:domain_module_name]}
               type="text"

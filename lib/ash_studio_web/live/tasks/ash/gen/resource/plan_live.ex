@@ -92,8 +92,14 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
       <.card variant="transparent" padding="medium">
         <.card_title title="mix ash.gen.resource" />
         <.card_content>
-          Generate the command line to create an Ash Resource
-          <.form_wrapper for={@form} phx-change="validate" phx-submit="validate" space="small">
+          <.p color="silver">Generate the command line to create an Ash Resource</.p>
+          <.form_wrapper
+            for={@form}
+            phx-change="validate"
+            phx-submit="validate"
+            padding="small"
+            space="small"
+          >
             <.resource_module_name field={@form[:resource_module_name]} />
 
             <div class="flex flex-wrap gap-4">
