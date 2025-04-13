@@ -1,4 +1,4 @@
-defmodule AshStudioWeb.IndexLive do
+defmodule AshStudioWeb.Tasks.IndexLive do
   alias Phoenix.HTML.Form
   alias AshStudio.ChatModelFactory
   alias LangChain.Chains.LLMChain
@@ -89,7 +89,7 @@ defmodule AshStudioWeb.IndexLive do
         </div>
         <div class="flex-1 space-y-8">
           <.card padding="small" variant="shadow" color="neutral">
-            <.card_title title="Tasks" />
+            <.card_title title="Task Forms" />
             <.card_content>
               <.p color="silver">Forms for mix tasks</.p>
               <.ash_gen_menu />
@@ -153,6 +153,9 @@ defmodule AshStudioWeb.IndexLive do
         </.form_wrapper>
       </.card_footer>
     </.card>
+    <.alert variant="outline" kind={:danger}>
+      The Chat feature uses my personal OpenAI account with $5 credit! Try it! Be kind, leave credits available for other users.
+    </.alert>
     """
   end
 
