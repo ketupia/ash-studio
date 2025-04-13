@@ -44,4 +44,4 @@ npm-debug.log
 Dockerfile
 fly.toml
 .github/workflows/fly-deploy.yml
-rel/env.sh.eex
+rel/**
