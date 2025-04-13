@@ -40,3 +40,8 @@ npm-debug.log
 /config/.env.exs
 
 .DS_Store
+.dockerignore
+Dockerfile
+fly.toml
+.github/workflows/fly-deploy.yml
+rel/env.sh.eex

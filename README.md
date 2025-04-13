@@ -32,3 +32,7 @@ The premise is to have a single set of Ash resources that can be used by
 ## 📦 Status
 
 This is an experimental playground — feedback and contributions welcome.
+
+[Github Repo](https://github.com/ketupia/ash-studio)
+
+[See it here](https://ash-studio.fly.dev) - The site will spin down after a period of inactivity; give it time to rehydrate on first request.

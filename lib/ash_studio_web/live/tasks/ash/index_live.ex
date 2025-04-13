@@ -29,18 +29,7 @@ defmodule AshStudioWeb.Tasks.IndexLive do
     llmchain =
       Map.put(socket.assigns.llmchain, :messages, [
         %LangChain.Message{
-          content: "Your name is?",
-          processed_content: nil,
-          index: nil,
-          status: :complete,
-          role: :user,
-          name: nil,
-          tool_calls: [],
-          tool_results: nil,
-          metadata: nil
-        },
-        %LangChain.Message{
-          content: "I am known as Assistant. How can I help you today?",
+          content: "How can I help you today?",
           processed_content: nil,
           index: 0,
           status: :complete,
@@ -55,13 +44,23 @@ defmodule AshStudioWeb.Tasks.IndexLive do
     assign(socket, llmchain: llmchain)
   end
 
-  defp assign_chat_form(socket) do
+  defp assign_chat_form(socket, opts \\ []) do
     assign(socket,
-      form: to_form(%{"message" => ""})
+      form: to_form(%{"message" => ""}, opts)
     )
   end
 
   @impl true
+  def handle_event("validate", %{"message" => message}, socket) do
+    errors =
+      case message do
+        "" -> [message: {"Message is required", []}]
+        _ -> []
+      end
+
+    {:noreply, assign_chat_form(socket, errors: errors, action: :validated)}
+  end
+
   def handle_event("send", %{"message" => message}, socket) do
     socket =
       socket.assigns.llmchain
@@ -138,15 +137,19 @@ defmodule AshStudioWeb.Tasks.IndexLive do
         </.chat>
       </.card_content>
       <.card_footer>
-        <.form_wrapper for={@form} phx-submit="send" space="small" id="my_form">
-          <.textarea_field
+        <.form_wrapper for={@form} phx-change="validate" phx-submit="send" space="small" id="my_form">
+          <.text_field
             field={@form[:message]}
             phx-keydown={JS.dispatch("submit", to: "#my_form")}
             phx-key="Enter"
             required
           />
           <:actions>
-            <.button type="submit" phx-disabled_with="Sending...">
+            <.button
+              type="submit"
+              phx-disabled_with="Sending..."
+              disabled={@form.action == nil or @form.errors != []}
+            >
               Send
             </.button>
           </:actions>
