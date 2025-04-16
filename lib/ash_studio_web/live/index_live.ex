@@ -10,7 +10,39 @@ defmodule AshStudioWeb.IndexLive do
      socket
      |> assign_new_chat()
      |> assign_chat_form()
-     |> assign_old_chat_messages()}
+     |> assign_old_chat_messages()
+     |> maybe_add_migrations_message()}
+  end
+
+  def maybe_add_migrations_message(socket) do
+    codegen_check = AshStudio.Tasks.codegen_check!()
+
+    [command | args] = String.split(codegen_check.command, " ")
+
+    llmchain =
+      System.cmd(command, args)
+      |> case do
+        {_, 0} ->
+          socket.assigns.llmchain
+
+        {_, 1} ->
+          LLMChain.add_message(socket.assigns.llmchain, %LangChain.Message{
+            content: "I ran `#{codegen_check.command}` and you have migrations to generate.",
+            processed_content: nil,
+            index: 0,
+            status: :complete,
+            role: :assistant,
+            name: nil,
+            tool_calls: [],
+            tool_results: nil,
+            metadata: nil
+          })
+
+        _ ->
+          socket.assigns.llmchain
+      end
+
+    assign(socket, llmchain: llmchain)
   end
 
   defp assign_new_chat(socket) do
@@ -59,36 +91,33 @@ defmodule AshStudioWeb.IndexLive do
 
   defp assign_old_chat_messages(socket) do
     llmchain =
-      case socket.assigns.llmchain do
-        nil ->
-          nil
-
-        llmchain ->
-          Map.put(llmchain, :messages, [
-            %LangChain.Message{
-              content: "Hello?",
-              processed_content: nil,
-              index: 0,
-              status: :complete,
-              role: :user,
-              name: nil,
-              tool_calls: [],
-              tool_results: nil,
-              metadata: nil
-            },
-            %LangChain.Message{
-              content: "How can I help you today?",
-              processed_content: nil,
-              index: 0,
-              status: :complete,
-              role: :assistant,
-              name: nil,
-              tool_calls: [],
-              tool_results: nil,
-              metadata: nil
-            }
-          ])
-      end
+      [
+        %LangChain.Message{
+          content: "Hello?",
+          processed_content: nil,
+          index: 0,
+          status: :complete,
+          role: :user,
+          name: nil,
+          tool_calls: [],
+          tool_results: nil,
+          metadata: nil
+        },
+        %LangChain.Message{
+          content: "How can I help you today?",
+          processed_content: nil,
+          index: 0,
+          status: :complete,
+          role: :assistant,
+          name: nil,
+          tool_calls: [],
+          tool_results: nil,
+          metadata: nil
+        }
+      ]
+      |> Enum.reduce(socket.assigns.llmchain, fn message, llmchain ->
+        LLMChain.add_message(llmchain, message)
+      end)
 
     assign(socket, llmchain: llmchain)
   end
