@@ -6,14 +6,16 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
   @impl true
   def mount(_params, _session, socket) do
     existing_domains =
-      Application.get_env(:ash_studio, :ash_domains, [])
-      |> Enum.map(&(Atom.to_string(&1) |> String.replace("Elixir.", "")))
-      |> Enum.sort()
+      Application.get_env(:ash_studio, :host_app)
+      |> Application.get_env(:ash_domains)
+      |> Enum.map(&Atom.to_string/1)
+      |> Enum.map(&String.replace(&1, "Elixir.", ""))
 
     # |> IO.inspect(label: "existing_domains")
 
     existing_resources =
-      Application.get_env(:ash_studio, :ash_domains, [])
+      Application.get_env(:ash_studio, :host_app)
+      |> Application.get_env(:ash_domains)
       |> Enum.flat_map(&Ash.Domain.Info.resources/1)
       |> Enum.map(&(Atom.to_string(&1) |> String.replace("Elixir.", "")))
       |> Enum.sort()
@@ -35,16 +37,6 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   @impl true
   def handle_event("validate", %{"form" => params}, socket) do
-    params =
-      update_in(params["default_actions"], fn default_actions ->
-        Enum.reject(default_actions, &(&1 == ""))
-      end)
-
-    params =
-      update_in(params["extensions"], fn extensions ->
-        Enum.reject(extensions, &(&1 == ""))
-      end)
-
     form = AshPhoenix.Form.validate(socket.assigns.form, params)
 
     command =
@@ -89,17 +81,11 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
   def render(assigns) do
     ~H"""
     <div class="space-y-4">
-      <.card variant="transparent" padding="medium">
-        <.card_title title="mix ash.gen.resource" />
-        <.card_content>
-          <.p color="silver">Generate the command line to create an Ash Resource</.p>
-          <.form_wrapper
-            for={@form}
-            phx-change="validate"
-            phx-submit="validate"
-            padding="small"
-            space="small"
-          >
+      <div class="p-4 shadow-lg">
+        <h2 class="text-lg font-semibold mb-2">mix ash.gen.resource</h2>
+        <div class="space-y-4">
+          <p style="color: #6b7280;">Generate the command line to create an Ash Resource</p>
+          <.simple_form for={@form} phx-change="validate" phx-submit="validate">
             <.resource_module_name field={@form[:resource_module_name]} />
 
             <div class="flex flex-wrap gap-4">
@@ -124,34 +110,28 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
             <.extensions field={@form[:extensions]} />
 
-            <:actions>
-              <.button>Submit</.button>
-            </:actions>
-          </.form_wrapper>
-        </.card_content>
+            <%!-- <:actions>
+              <.button phx-disable-with="Thinking...">Submit</.button>
+            </:actions> --%>
+          </.simple_form>
 
-        <.card_footer>
-          <.button
-            disabled={@command == ""}
-            phx-hook="CopyToClipboardHook"
-            data-target="command"
-            id="copy-command-button"
-            variant="default"
-            color="primary"
-          >
-            <.icon name="hero-clipboard" class="size-6" />
-          </.button>
-          <span id="command">{@command}</span>
-          <.skeleton
-            :if={@command == ""}
-            class="inline-block"
-            color="base"
-            height="large"
-            rounded="large"
-            width="w-24 md:w-72"
-          />
-        </.card_footer>
-      </.card>
+          <div class="flex gap-2 items-center">
+            <.button
+              disabled={@command == "" or @command == nil}
+              phx-hook="CopyToClipboardHook"
+              data-target="command"
+              id="copy-command-button"
+            >
+              <span :if={@command != "" and @command != nil} class="text-lg">📋</span>
+            </.button>
+            <span id="command">{@command}</span>
+            <div
+              :if={@command == "" or @command == nil}
+              style="background-color: #6b7280; width: 24ch; height:1em; border-radius: 0.75rem;"
+            />
+          </div>
+        </div>
+      </div>
     </div>
     """
   end
@@ -160,30 +140,23 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp extensions(assigns) do
     ~H"""
-    <.card padding="small">
-      <.card_title title="Extensions" />
-      <.card_content>
-        <.checkbox_card field={@field} cols="three" show_checkbox={true}>
-          <:checkbox
-            :for={
-              {label, value, description} <- [
-                {"Policies", "Ash.Policy.Authorizer", "Ash.Policy.Authorizer"},
-                {"Admin", "AshAdmin.Resource", "AshAdmin.Resource"},
-                {"Json API", "json_api", ""},
-                {"GraphQL", "graphql", ""},
-                {"PubSub", "Ash.Notifier.PubSub", "Ash.Notifier.PubSub"},
-                {"Postgres", "postgres", ""}
-              ]
-            }
-            value={value}
-            title={label}
-            description={description}
-            checked={value in @field.value}
-          >
-          </:checkbox>
-        </.checkbox_card>
-      </.card_content>
-    </.card>
+    <div class="p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Extensions</h2>
+      <.input
+        type="select"
+        field={@field}
+        multiple={true}
+        size={6}
+        options={[
+          {"Policies", "Ash.Policy.Authorizer"},
+          {"Admin", "AshAdmin.Resource"},
+          {"Json API", "json_api"},
+          {"GraphQL", "graphql"},
+          {"PubSub", "Ash.Notifier.PubSub"},
+          {"Postgres", "postgres"}
+        ]}
+      />
+    </div>
     """
   end
 
@@ -191,27 +164,21 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp default_actions(assigns) do
     ~H"""
-    <.card padding="small">
-      <.card_title title="Default Actions" />
-      <.card_content>
-        <.checkbox_card field={@field} cols="four" show_checkbox={true}>
-          <:checkbox
-            :for={
-              {label, value} <- [
-                {"Create", "create"},
-                {"Read", "read"},
-                {"Update", "update"},
-                {"Destroy", "destroy"}
-              ]
-            }
-            value={value}
-            title={label}
-            checked={value in @field.value}
-          >
-          </:checkbox>
-        </.checkbox_card>
-      </.card_content>
-    </.card>
+    <div class="p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Default Actions</h2>
+      <.input
+        type="select"
+        field={@field}
+        multiple={true}
+        size={4}
+        options={[
+          {"Create", "create"},
+          {"Read", "read"},
+          {"Update", "update"},
+          {"Destroy", "destroy"}
+        ]}
+      />
+    </div>
     """
   end
 
@@ -221,10 +188,9 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp relationships(assigns) do
     ~H"""
-    <.card padding="small">
-      <.card_title>
-        <h2>Relationships</h2>
-
+    <div class="p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Relationships</h2>
+      <div class="space-y-4">
         <.button
           type="button"
           phx-click="add-relationship-spec"
@@ -232,8 +198,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
         >
           <.icon name="hero-plus" class="size-4" />
         </.button>
-      </.card_title>
-      <.card_content>
+      </div>
+      <div class="space-y-4">
         <datalist id="existing_resources">
           <option :for={name <- @existing_resources} value={name} />
         </datalist>
@@ -291,8 +257,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
             </label>
           </div>
         </.inputs_for>
-      </.card_content>
-    </.card>
+      </div>
+    </div>
     """
   end
 
@@ -304,10 +270,9 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
       assign(assigns, :attribute_type_options, Enum.sort(Keyword.keys(Ash.Type.short_names())))
 
     ~H"""
-    <.card padding="small">
-      <.card_title>
-        <h2>Attributes</h2>
-
+    <div class="p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Attributes</h2>
+      <div class="space-y-4">
         <.button
           type="button"
           phx-click="add-attribute-spec"
@@ -315,8 +280,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
         >
           <.icon name="hero-plus" class="size-4" />
         </.button>
-      </.card_title>
-      <.card_content>
+      </div>
+      <div class="space-y-4">
         <.inputs_for :let={attr} field={@field}>
           <div class="flex flex-wrap gap-2 mb-2">
             <div>
@@ -349,8 +314,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
             </label>
           </div>
         </.inputs_for>
-      </.card_content>
-    </.card>
+      </div>
+    </div>
     """
   end
 
@@ -359,9 +324,9 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp primary_key(assigns) do
     ~H"""
-    <.card padding="small">
-      <.card_title title="Primary Key" />
-      <.card_content>
+    <div class="p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Primary Key</h2>
+      <div class="space-y-4">
         <div class="flex flex-wrap gap-2">
           <.input
             field={@type_field}
@@ -377,8 +342,8 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
           />
           <.input field={@name_field} type="text" label="Name" phx-debounce />
         </div>
-      </.card_content>
-    </.card>
+      </div>
+    </div>
     """
   end
 
@@ -386,7 +351,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp include_timestamps(assigns) do
     ~H"""
-    <.toggle_field label="Include Timestamps" field={@field} checked={@field.value} phx-debounce />
+    <.input type="checkbox" label="Include Timestamps" field={@field} />
     """
   end
 
@@ -394,7 +359,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
 
   defp ignore_if_exists(assigns) do
     ~H"""
-    <.toggle_field label="Ignore If Exists" field={@field} checked={@field.value} phx-debounce />
+    <.input type="checkbox" label="Ignore If Exists" field={@field} />
     """
   end
 

@@ -17,7 +17,6 @@ The premise is to have a single set of Ash resources that can be used by
 - **Ash Framework** — defines MCP services as embedded, stateless resources.
 - **Ash AI** — exposes the tools in a chat interface.
 - **Phoenix LiveView** — provides a UI for human developers to interact with tools.
-- **Mishka Chelekom** — UI component library.
 
 ---
 
@@ -36,3 +35,47 @@ This is an experimental playground — feedback and contributions welcome.
 [Github Repo](https://github.com/ketupia/ash-studio)
 
 [See it here](https://ash-studio.fly.dev) - The site will spin down after a period of inactivity; give it time to rehydrate on first request.
+
+## Installation
+
+### Mix Dependency
+
+      {:ash_studio, "~> 0.1", github: "ketupia/ash_studio", only: :dev},
+
+### Config
+
+    Add AshStudio.Tasks to your app's `:ash_domains`
+    ```elixir
+        config :your_app,
+            ash_domains: [AshStudio.Tasks]
+    ```
+
+    Add :ash_studio to your app's `:host_app` config
+    ```elixir
+        config :ash_studio, :host_app, :your_app
+    ```
+
+### Routes
+
+    In your router file
+
+    ```elixir
+        import AshStudioWeb.Router
+
+        ash_studio_routes(path: "/studio", pipe_through: [:browser])
+    ```
+
+    You must use `/studio` as the path presently.
+
+### Open AI Config
+
+    Add your OpenAI API key as an environment variable.
+    e.g.
+    ```
+        System.put_env("open_api_key", "your key here")
+    ```
+
+    Specify the Open AI model to use
+    ```elixir
+        config :ash_studio, :open_ai_model, "gpt-4o-mini"
+    ```

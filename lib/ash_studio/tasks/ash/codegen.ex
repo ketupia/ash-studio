@@ -34,19 +34,19 @@ defmodule AshStudio.Tasks.Ash.Codegen do
         constraints: [trim?: true, allow_empty?: true]
 
       change fn changeset, _ctx ->
-        migration_file_name =
+        command =
           Ash.Changeset.get_argument(changeset, :migration_file_name)
           |> String.split()
           |> Enum.map(&String.trim/1)
           |> Enum.reject(&(String.length(&1) == 0))
           |> Enum.join("_")
           |> String.downcase()
+          |> case do
+            "" -> ""
+            migration_file_name -> "mix ash.codegen #{migration_file_name}"
+          end
 
-        Ash.Changeset.change_attribute(
-          changeset,
-          :command,
-          "mix ash.codegen #{migration_file_name}"
-        )
+        Ash.Changeset.change_attribute(changeset, :command, command)
       end
     end
   end
@@ -55,7 +55,7 @@ defmodule AshStudio.Tasks.Ash.Codegen do
     integer_primary_key :id, public?: false
 
     attribute :command, :string,
-      allow_nil?: false,
+      allow_nil?: true,
       public?: true,
       description: "Command to run to generate the domain"
   end

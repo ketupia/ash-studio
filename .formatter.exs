@@ -1,15 +1,10 @@
 [
   import_deps: [
     :ash_ai,
-    :ash_admin,
-    :ash_authentication_phoenix,
-    :ash_authentication,
-    :ash_postgres,
     :ash_json_api,
     :ash,
     :reactor,
     :ecto,
-    :ecto_sql,
     :phoenix
   ],
   subdirectories: ["priv/*/migrations"],

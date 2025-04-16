@@ -30,9 +30,4 @@ defmodule AshStudioWeb.ConnCase do
       import AshStudioWeb.ConnCase
     end
   end
-
-  setup tags do
-    AshStudio.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
-  end
 end

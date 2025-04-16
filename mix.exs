@@ -7,20 +7,16 @@ defmodule AshStudio.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
-      start_permanent: Mix.env() == :prod,
       consolidate_protocols: Mix.env() != :dev,
       aliases: aliases(),
-      deps: deps()
-    ]
-  end
-
-  # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
-  def application do
-    [
-      mod: {AshStudio.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      deps: deps(),
+      package: package(),
+      description: "AI development tools for the Ash Framework.",
+      source_url: "https://github.com/ketupia/ash_studio",
+      docs: [
+        main: "readme",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -34,21 +30,11 @@ defmodule AshStudio.MixProject do
   defp deps do
     [
       {:ash, "~> 3.0"},
-      {:ash_admin, "~> 0.13"},
       {:ash_ai, "~> 0.1", github: "ash-project/ash_ai"},
-      {:ash_authentication, "~> 4.0"},
-      {:ash_authentication_phoenix, "~> 2.0"},
       {:ash_phoenix, "~> 2.0"},
-      {:ash_postgres, "~> 2.0"},
-      {:bandit, "~> 1.5"},
-      {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:dns_cluster, "~> 0.1.1"},
-      {:ecto_sql, "~> 3.10"},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:finch, "~> 0.13"},
-      {:floki, ">= 0.30.0", only: :test},
-      {:gettext, "~> 0.26"},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
+      {:gettext, "~> 0.26 and >= 0.26.1"},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.1",
@@ -58,23 +44,23 @@ defmodule AshStudio.MixProject do
        depth: 1},
       {:igniter, "~> 0.5", only: [:dev, :test]},
       {:jason, "~> 1.2"},
-      {:mcp_sse, "~> 0.1"},
-      {:mishka_chelekom, "~> 0.0", only: [:dev]},
-      {:open_api_spex, "~> 3.0"},
+      # {:mcp_sse, "~> 0.1"},
+      # {:open_api_spex, "~> 3.0"},
       {:phoenix, "~> 1.7.20"},
-      {:phoenix_ecto, "~> 4.5"},
       {:phoenix_html, "~> 4.1"},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.0.0"},
       {:picosat_elixir, "~> 0.2"},
-      {:postgrex, ">= 0.0.0"},
-      {:redoc_ui_plug, "~> 0.2"},
+      # {:redoc_ui_plug, "~> 0.2"},
       {:sourceror, "~> 1.7", only: [:dev, :test]},
-      {:swoosh, "~> 1.5"},
-      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
-      {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"}
+      {:telemetry_metrics, "~> 1.0"}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Kevin Bolton"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/ketupia/ash_studio"}
     ]
   end
 
@@ -86,18 +72,9 @@ defmodule AshStudio.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ash.setup", "assets.setup", "assets.build", "run priv/repo/seeds.exs"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ash.setup --quiet", "test"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind ash_studio", "esbuild ash_studio"],
-      "assets.deploy": [
-        "tailwind ash_studio --minify",
-        "esbuild ash_studio --minify",
-        "phx.digest"
-      ],
-      "phx.routes": ["phx.routes", "ash_json_api.routes", "ash_authentication.phoenix.routes"]
+      test: ["test"],
+      "test.setup": ["ash.setup --quiet", "test"],
+      "test.with_coverage": ["coveralls.html", "test"]
     ]
   end
 end

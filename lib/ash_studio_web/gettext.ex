@@ -6,7 +6,7 @@ defmodule AshStudioWeb.Gettext do
   that you can use in your application. To use this Gettext backend module,
   call `use Gettext` and pass it as an option:
 
-      use Gettext, backend: AshStudioWeb.Gettext
+      use Gettext, backend: AshStudioDemoWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")

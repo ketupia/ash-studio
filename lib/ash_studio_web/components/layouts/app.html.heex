@@ -1,6 +1,17 @@
-<main class="px-4 py-4 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-4xl">
-    <.flash_group flash={@flash} />
-    {@inner_content}
+<main class="px-4 py-4 sm:px-6 lg:px-8 mx-auto max-w-4xl">
+  <div
+    class="bg-white px-4 lg:px-6 py-4 shadow-sm"
+    style="border:2px solid #777777; background-color:#777777; color: white"
+  >
+    <div class="flex flex-wrap justify-between items-center mx-auto">
+      <a href="/studio" class="flex items-end gap-2">
+        <img src="https://ash-hq.org/images/ash_logo_orange.svg" class="size-10" />
+        <h1 class="text-xl font-semibold">
+          Ash Studio
+        </h1>
+      </a>
+    </div>
   </div>
+
+  {@inner_content}
 </main>

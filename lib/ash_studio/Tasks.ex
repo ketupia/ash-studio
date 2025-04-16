@@ -7,10 +7,6 @@ defmodule AshStudio.Tasks do
     otp_app: :ash_studio,
     extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix, AshAi]
 
-  admin do
-    show? true
-  end
-
   # json_api do
   #   routes do
   #     base_route "/tasks/resources", AshStudio.Tasks.Ash.Gen.Resource do
@@ -29,14 +25,9 @@ defmodule AshStudio.Tasks do
     tool :codegen_command_line, AshStudio.Tasks.Ash.Codegen, :command_line
     tool :domain_command_line, AshStudio.Tasks.Ash.Gen.Domain, :command_line
     tool :resource_command_line, AshStudio.Tasks.Ash.Gen.Resource, :command_line
-    # tool :run_system_command, AshStudio.Tasks.SystemCommandResult, :run
   end
 
   resources do
-    resource AshStudio.Tasks.SystemCommandResult do
-      define :run_system_command, action: :run, args: [:system_command]
-    end
-
     resource AshStudio.Tasks.Ash.Codegen do
       define :codegen_check, action: :check
       define :codegen_dry_run, action: :dry_run

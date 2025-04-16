@@ -45,3 +45,8 @@ Dockerfile
 fly.toml
 .github/workflows/fly-deploy.yml
 rel/**
+.credo.exs
+.windsurfrules
+
+/.cursor/
+/.github/

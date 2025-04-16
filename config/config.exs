@@ -9,7 +9,7 @@ import Config
 
 # Configure the MCP Server
 # config :mcp_sse, :mcp_server, MCP.DefaultServer
-config :mcp_sse, :mcp_server, AshStudio.MCP.Server
+# config :mcp_sse, :mcp_server, AshStudio.MCP.Server
 
 config :mime,
   extensions: %{"json" => "application/vnd.api+json"},
@@ -34,7 +34,6 @@ config :spark,
     "Ash.Resource": [
       section_order: [
         :admin,
-        :authentication,
         :tokens,
         :postgres,
         :json_api,
@@ -68,51 +67,10 @@ config :spark,
   ]
 
 config :ash_studio,
-  ecto_repos: [AshStudio.Repo],
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [AshStudio.Accounts, AshStudio.Tasks]
+  ash_domains: [AshStudio.Tasks]
 
-# Configures the endpoint
-config :ash_studio, AshStudioWeb.Endpoint,
-  url: [host: "localhost"],
-  adapter: Bandit.PhoenixAdapter,
-  render_errors: [
-    formats: [html: AshStudioWeb.ErrorHTML, json: AshStudioWeb.ErrorJSON],
-    layout: false
-  ],
-  pubsub_server: AshStudio.PubSub,
-  live_view: [signing_salt: "WMdoWC8c"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :ash_studio, AshStudio.Mailer, adapter: Swoosh.Adapters.Local
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.17.11",
-  ash_studio: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
-
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "3.4.3",
-  ash_studio: [
-    args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
-    cd: Path.expand("../assets", __DIR__)
-  ]
+config :ash_studio, :host_app, :ash_studio
 
 # Configures Elixir's Logger
 config :logger, :console,

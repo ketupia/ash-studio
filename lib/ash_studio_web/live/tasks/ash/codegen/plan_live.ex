@@ -15,69 +15,56 @@ defmodule AshStudioWeb.Tasks.Ash.Codegen.PlanLive do
   def render(assigns) do
     ~H"""
     <div class="space-y-4">
-      <.card variant="transparent" padding="medium">
-        <.card_title title="mix ash.codegen" />
-        <.card_content>
-          <.p color="silver">Generate the command line to create a migration file</.p>
-          <.form_wrapper for={@form} phx-change="validate" padding="small" space="small">
-            <.input
-              field={@form[:migration_file_name]}
-              type="text"
-              label="Migration File Name"
-              phx-debounce
-            />
-          </.form_wrapper>
-        </.card_content>
+      <h2 class="text-lg font-semibold mb-2">mix ash.codegen</h2>
+      <p style="color: #6b7280;">Generate the command line to create a migration file</p>
+      <.simple_form for={@form} phx-change="validate">
+        <.input
+          field={@form[:migration_file_name]}
+          type="text"
+          label="Migration File Name"
+          phx-debounce
+          required
+        />
+      </.simple_form>
 
-        <.card_footer>
-          <.button
-            disabled={@command == ""}
-            phx-hook="CopyToClipboardHook"
-            data-target="command"
-            id="copy-command-button"
-            variant="default"
-            color="primary"
-          >
-            <.icon name="hero-clipboard" class="size-6" />
-          </.button>
-          <span id="command">{@command}</span>
-          <.skeleton
-            :if={@command == ""}
-            class="inline-block"
-            color="base"
-            height="large"
-            rounded="large"
-            width="w-24 md:w-72"
-          />
-        </.card_footer>
-      </.card>
+      <div class="flex gap-2 items-center">
+        <.button
+          disabled={@command == "" or @command == nil}
+          phx-hook="CopyToClipboardHook"
+          data-target="command"
+          id="copy-command-button"
+        >
+          <span :if={@command != "" and @command != nil} class="text-lg">📋</span>
+        </.button>
+        <span id="command">{@command}</span>
+        <div
+          :if={@command == "" or @command == nil}
+          style="background-color: #6b7280; width: 24ch; height:1em; border-radius: 0.75rem;"
+        />
+      </div>
     </div>
 
-    <.card class="mt-12" padding="medium" variant="transparent">
-      <.card_title>Other Codegen Commands</.card_title>
-      <.card_content>
+    <div class="space-y-4 p-4 shadow-lg">
+      <h2 class="text-lg font-semibold mb-2">Other Codegen Commands</h2>
+      <div class="flex gap-2 items-center">
         <.button
           phx-hook="CopyToClipboardHook"
           data-target="check_command"
           id="copy-check-command-button"
-          variant="outline"
-          color="primary"
         >
-          <.icon name="hero-clipboard" class="size-6" />
+          <span class="text-lg">📋</span>
           <span id="check_command">mix ash.codegen --check</span>
         </.button>
         <.button
           phx-hook="CopyToClipboardHook"
           data-target="dry_run_command"
           id="copy-dry-run-command-button"
-          variant="outline"
-          color="primary"
         >
-          <.icon name="hero-clipboard" class="size-6" />
+          <span class="text-lg">📋</span>
           <span id="dry_run_command">mix ash.codegen --dry-run</span>
         </.button>
-      </.card_content>
-    </.card>
+      </div>
+    </div>
     """
   end
 
@@ -94,10 +81,10 @@ defmodule AshStudioWeb.Tasks.Ash.Codegen.PlanLive do
           codegen.command
 
         form.errors != [] ->
-          "errors"
+          ""
 
         true ->
-          "true"
+          ""
       end
 
     {:noreply, assign(socket, form: form, command: command)}

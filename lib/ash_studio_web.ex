@@ -19,35 +19,8 @@ defmodule AshStudioWeb do
 
   def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
-  def router do
-    quote do
-      use Phoenix.Router, helpers: false
-
-      # Import common connection and controller functions to use in pipelines
-      import Plug.Conn
-      import Phoenix.Controller
-      import Phoenix.LiveView.Router
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-    end
-  end
-
-  def controller do
-    quote do
-      use Phoenix.Controller,
-        formats: [:html, :json],
-        layouts: [html: AshStudioWeb.Layouts]
-
-      use Gettext, backend: AshStudioWeb.Gettext
-
-      import Plug.Conn
-
-      unquote(verified_routes())
-    end
+  def static_path(path) do
+    Path.join(Application.app_dir(:ash_studio, "priv/static"), path)
   end
 
   def live_view do
@@ -88,7 +61,7 @@ defmodule AshStudioWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components
-      use AshStudioWeb.Components.MishkaComponents
+      import AshStudioWeb.CoreComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -98,12 +71,16 @@ defmodule AshStudioWeb do
     end
   end
 
-  def verified_routes do
+  def verified_routes(opts \\ []) do
+    endpoint = Keyword.get(opts, :endpoint, AshStudioWeb.Endpoint)
+    router = Keyword.get(opts, :router, AshStudioWeb.Router)
+    statics = Keyword.get(opts, :statics, AshStudioWeb.static_paths())
+
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: AshStudioWeb.Endpoint,
-        router: AshStudioWeb.Router,
-        statics: AshStudioWeb.static_paths()
+        endpoint: unquote(endpoint),
+        router: unquote(router),
+        statics: unquote(statics)
     end
   end
 
