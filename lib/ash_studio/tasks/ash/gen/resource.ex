@@ -187,13 +187,13 @@ defmodule AshStudio.Tasks.Ash.Gen.Resource do
     Ash.Changeset.get_argument(changeset, :primary_key_type)
     |> case do
       :uuid_v4 ->
-        "--primary-key-uuid #{primary_key_name}"
+        "--uuid-primary-key #{primary_key_name}"
 
       :uuid_v7 ->
-        "--primary-key-uuid-v7 #{primary_key_name}"
+        "--uuid-v7-primary-key #{primary_key_name}"
 
       :integer ->
-        "--primary-key-integer #{primary_key_name}"
+        "--integer-primary-key #{primary_key_name}"
 
       _ ->
         nil
