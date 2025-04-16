@@ -195,8 +195,9 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
           type="button"
           phx-click="add-relationship-spec"
           phx-value-path={@form_name <> "[relationship_specs]"}
+          style="color: white;"
         >
-          <.icon name="hero-plus" class="size-4" />
+          Add
         </.button>
       </div>
       <div class="space-y-4">
@@ -251,9 +252,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
                 name={"#{@form_name}[_drop_relationship_specs][]"}
                 value={rel.index}
                 class="hidden"
-              />
-
-              <.icon name="hero-trash" class="size-6 text-red-700" />
+              /> ❌
             </label>
           </div>
         </.inputs_for>
@@ -277,8 +276,9 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
           type="button"
           phx-click="add-attribute-spec"
           phx-value-path={@form_name <> "[attribute_specs]"}
+          style="color: white;"
         >
-          <.icon name="hero-plus" class="size-4" />
+          Add
         </.button>
       </div>
       <div class="space-y-4">
@@ -308,9 +308,7 @@ defmodule AshStudioWeb.Tasks.Ash.Gen.Resource.PlanLive do
                 name={"#{@form_name}[_drop_attribute_specs][]"}
                 value={attr.index}
                 class="hidden"
-              />
-
-              <.icon name="hero-trash" class="size-6 text-red-700" />
+              /> ❌
             </label>
           </div>
         </.inputs_for>
