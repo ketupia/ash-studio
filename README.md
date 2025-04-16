@@ -8,21 +8,19 @@ Resource browser, live updating on compile, bidirectional sync w/ source code, t
 
 The premise is to have a single set of Ash resources that can be used by
 
-- ✅ Forms
-- ✅ AI Chat Bots
-- ❌ AI Code Agents (MCP)
-
-❌ In all cases, enable executing the operation on your behalf.
-
----
+| Tool                         | UI  | Chat Bot | MCP Server |
+| ---------------------------- | :-: | :------: | :--------: |
+| ash.codegen --check          | ✅  |    ✅    |     ❌     |
+| ash.codegen --dry-run        | ✅  |    ✅    |     ❌     |
+| ash.codegen <migration_file> | ✅  |    ✅    |     ❌     |
+| ash.gen.domain <domain_name> | ✅  |    ✅    |     ❌     |
+| ash.gen.resource <resource>  | ✅  |    ❌    |     ❌     |
 
 ## 🔧 Architecture Overview
 
 - **Ash Framework** — defines MCP services as embedded, stateless resources.
 - **Ash AI** — exposes the tools in a chat interface.
 - **Phoenix LiveView** — provides a chat interface and forms for human developers to interact with tools.
-
----
 
 ## 📍 Goals
 
