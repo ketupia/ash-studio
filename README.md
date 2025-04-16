@@ -60,6 +60,19 @@ This is an experimental playground — feedback and contributions welcome.
             open_ai_model: "gpt-4o-mini"
     ```
 
+### Tailwind
+
+    Add ash_studio files to your module.exports
+    ```
+        module.exports = {
+            content: [
+                "../deps/ash_studio/**/*.*ex",
+                // other content paths...
+    ]
+
+}
+```
+
 ### Routes
 
     In your router file
