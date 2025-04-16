@@ -2,8 +2,8 @@
 
 This library is aims to build AI development tools for the [Ash Framework](https://ash-hq.org). It is not an official Ash module.
 
-
 ## Ideas
+
 Resource browser, live updating on compile, bidirectional sync w/ source code, tracing of actions that execute as they execute, resource graph visualizer w/ canvas instead of mermaid, monitor reactors as they run etc.
 
 The premise is to have a single set of Ash resources that can be used by
@@ -25,6 +25,7 @@ The premise is to have a single set of Ash resources that can be used by
 ---
 
 ## 📍 Goals
+
 - Let AI agents safely interact with your dev environment using domain-aware tools
 - Provide consistent, convention-driven automation surfaces for common Ash/Phoenix tasks
 - Keep humans in the loop with a LiveView UI
@@ -55,7 +56,10 @@ This is an experimental playground — feedback and contributions welcome.
 
     Add :ash_studio to your app's `:host_app` config
     ```elixir
-        config :ash_studio, :host_app, :your_app
+        config :ash_studio,
+            ash_domains: [AshStudio.Tasks],
+            host_app: :ash_studio_demo,
+            open_ai_model: "gpt-4o-mini"
     ```
 
 ### Routes
