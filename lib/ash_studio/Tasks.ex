@@ -5,7 +5,7 @@ defmodule AshStudio.Tasks do
 
   use Ash.Domain,
     otp_app: :ash_studio,
-    extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix, AshAi]
+    extensions: [AshJsonApi.Domain, AshPhoenix, AshAi]
 
   # json_api do
   #   routes do
