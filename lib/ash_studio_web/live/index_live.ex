@@ -6,15 +6,17 @@ defmodule AshStudioWeb.IndexLive do
 
   @impl true
   def mount(_params, _session, socket) do
+    send(self(), :check_migrations)
+
     {:ok,
      socket
      |> assign_new_chat()
      |> assign_chat_form()
-     |> assign_old_chat_messages()
-     |> maybe_add_migrations_message()}
+     |> assign_old_chat_messages()}
   end
 
-  def maybe_add_migrations_message(socket) do
+  @impl true
+  def handle_info(:check_migrations, socket) do
     codegen_check = AshStudio.Tasks.codegen_check!()
 
     [command | args] = String.split(codegen_check.command, " ")
@@ -42,7 +44,7 @@ defmodule AshStudioWeb.IndexLive do
           socket.assigns.llmchain
       end
 
-    assign(socket, llmchain: llmchain)
+    {:noreply, assign(socket, llmchain: llmchain)}
   end
 
   defp assign_new_chat(socket) do
