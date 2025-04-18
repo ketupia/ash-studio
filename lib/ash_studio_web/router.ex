@@ -8,10 +8,15 @@ defmodule AshStudioWeb.Router do
       scope unquote(opts[:path] || "/studio"), AshStudioWeb do
         pipe_through unquote(opts[:pipe_through] || [:browser])
 
+        get "/diagram/:filename", DiagramController, :show
+
         live "/", IndexLive
         live "/tasks/ash/gen/domain", Tasks.Ash.Gen.Domain.PlanLive
         live "/tasks/ash/gen/resource", Tasks.Ash.Gen.Resource.PlanLive
         live "/tasks/ash/codegen", Tasks.Ash.Codegen.PlanLive
+
+        live "/info/domains", Info.Domains.IndexLive
+        live "/info/domains/:domain/resources/:resource", Info.Domains.Resources.ShowLive
       end
     end
   end

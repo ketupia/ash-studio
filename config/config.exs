@@ -68,7 +68,7 @@ config :spark,
 
 config :ash_studio,
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [AshStudio.Tasks]
+  ash_domains: [AshStudio.Tasks, AshStudio.Info]
 
 config :ash_studio, :host_app, :ash_studio
 

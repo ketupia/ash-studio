@@ -23,6 +23,18 @@ defmodule AshStudioWeb do
     Path.join(Application.app_dir(:ash_studio, "priv/static"), path)
   end
 
+  def controller do
+    quote do
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        layouts: [html: AshStudioWeb.Layouts]
+
+      use Gettext, backend: AshStudioWeb.Gettext
+
+      import Plug.Conn
+    end
+  end
+
   def live_view do
     quote do
       use Phoenix.LiveView,

@@ -55,4 +55,8 @@ defmodule AshStudio.Tasks do
         ]
     end
   end
+
+  domain do
+    description "Provides Mix Task access"
+  end
 end

@@ -179,6 +179,13 @@ defmodule AshStudioWeb.IndexLive do
               <.ash_codegen_menu />
             </div>
           </div>
+          <div class="p-4 shadow-lg">
+            <h2 class="text-lg font-semibold mb-2">Introspection</h2>
+            <div class="space-y-4">
+              <p style="color: #6b7280;">Metadata and diagrams</p>
+              <.introspection_menu />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -197,11 +204,11 @@ defmodule AshStudioWeb.IndexLive do
 
         <p>The premise is to have a single set of Ash resources that can be used by</p>
         <ul class="list-disc space-y-2">
-          <li>✅ Forms</li>
-          <li>🟡 AI Chat Bots - tools mostly work but not for ash.gen.resource</li>
-          <li>❌ AI Code Agents</li>
+          <li>Forms</li>
+          <li>AI Chat Bots - tools mostly work but not for ash.gen.resource</li>
+          <li>AI Code Agents</li>
         </ul>
-        <p>❌ In all cases, enable executing the operation on your behalf.</p>
+        <p>In all cases, enable executing the operation on your behalf.</p>
       </div>
     </details>
     """
@@ -353,6 +360,20 @@ defmodule AshStudioWeb.IndexLive do
         <li>
           <.link navigate="/studio/tasks/ash/gen/resource" style="text-decoration: underline">
             ash.gen.resource
+          </.link>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  def introspection_menu(assigns) do
+    ~H"""
+    <div class="space-y-4">
+      <ul>
+        <li>
+          <.link navigate="/studio/info/domains" style="text-decoration: underline">
+            Domains and Resources
           </.link>
         </li>
       </ul>
