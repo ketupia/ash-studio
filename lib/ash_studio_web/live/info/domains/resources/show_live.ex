@@ -1,4 +1,5 @@
 defmodule AshStudioWeb.Info.Domains.Resources.ShowLive do
+  alias AshStudio.Mermaid
   use AshStudioWeb, :live_view
 
   import AshStudioWeb.AshStudioComponents
@@ -8,51 +9,13 @@ defmodule AshStudioWeb.Info.Domains.Resources.ShowLive do
     AshStudio.Info.reset_domain_and_resource_data()
     resource = AshStudio.Info.get_resource_by_name!(resource_str)
 
-    send(self(), :create_policy_flowchart)
-
     {:ok,
      socket
      |> assign(resource: resource)
-     |> assign_diagram(:policy_flowchart)}
-  end
-
-  defp assign_diagram(socket, chart_type, format \\ "svg") do
-    resource = socket.assigns.resource
-    source = resource.name.module_info(:compile)[:source]
-
-    suffix =
-      case chart_type do
-        :policy_flowchart -> "policy-flowchart"
-      end
-
-    file = Mix.Mermaid.file(source, suffix, format)
-
-    svg =
-      if File.exists?(file) do
-        file
-      else
-        nil
-      end
-
-    socket |> assign(chart_type, svg)
-  end
-
-  @impl true
-  def handle_info(:create_policy_flowchart, socket) do
-    resource = socket.assigns.resource
-    source = resource.name.module_info(:compile)[:source]
-
-    Mix.Mermaid.generate_diagram(
-      source,
-      "policy-flowchart",
-      "svg",
-      Ash.Policy.Chart.Mermaid.chart(resource.name),
-      "Generated Mermaid Flow Chart for #{inspect(resource.name)}"
-    )
-
-    {:noreply,
-     socket
-     |> assign_diagram(:policy_flowchart)}
+     |> assign(
+       policy_flowchart_url:
+         Mermaid.generate_image_url(Ash.Policy.Chart.Mermaid.chart(resource.name))
+     )}
   end
 
   @impl true
@@ -71,18 +34,13 @@ defmodule AshStudioWeb.Info.Domains.Resources.ShowLive do
           <.icon :if={attr.primary_key?} name="hero-key" class="size-4" />
           {attr.name}
         </:col>
-        <:col :let={attr} label="type">{attr.type}</:col>
+        <:col :let={attr} label="type">{inspect(attr.type)}</:col>
         <:col :let={attr} label="allow_nil?">{attr.allow_nil?}</:col>
         <:col :let={attr} label="description">{attr.description}</:col>
       </.table>
 
       <h2 class="text-xl font-semibold">Policy Flowchart</h2>
-      <div :if={@policy_flowchart}>
-        {raw(File.read!(@policy_flowchart))}
-      </div>
-      <p :if={is_nil(@policy_flowchart)}>
-        Generating diagram...
-      </p>
+      <img :if={@policy_flowchart_url} src={@policy_flowchart_url} />
 
       <.back navigate="/studio/info/domains">Back to domains</.back>
     </div>
