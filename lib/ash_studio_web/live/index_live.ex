@@ -17,9 +17,6 @@ defmodule AshStudioWeb.IndexLive do
 
   @impl true
   def handle_info(:check_migrations, socket) do
-    Application.get_env(:ash_studio, :check_migrations, false)
-    |> IO.inspect(label: "check_migrations")
-
     if Application.get_env(:ash_studio, :check_migrations, false) do
       codegen_check = AshStudio.Tasks.codegen_check!()
 
