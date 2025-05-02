@@ -17,34 +17,41 @@ defmodule AshStudioWeb.IndexLive do
 
   @impl true
   def handle_info(:check_migrations, socket) do
-    codegen_check = AshStudio.Tasks.codegen_check!()
+    Application.get_env(:ash_studio, :check_migrations, false)
+    |> IO.inspect(label: "check_migrations")
 
-    [command | args] = String.split(codegen_check.command, " ")
+    if Application.get_env(:ash_studio, :check_migrations, false) do
+      codegen_check = AshStudio.Tasks.codegen_check!()
 
-    llmchain =
-      System.cmd(command, args)
-      |> case do
-        {_, 0} ->
-          socket.assigns.llmchain
+      [command | args] = String.split(codegen_check.command, " ")
 
-        {_, 1} ->
-          LLMChain.add_message(socket.assigns.llmchain, %LangChain.Message{
-            content: "I ran `#{codegen_check.command}` and you have migrations to generate.",
-            processed_content: nil,
-            index: 0,
-            status: :complete,
-            role: :assistant,
-            name: nil,
-            tool_calls: [],
-            tool_results: nil,
-            metadata: nil
-          })
+      llmchain =
+        System.cmd(command, args)
+        |> case do
+          {_, 0} ->
+            socket.assigns.llmchain
 
-        _ ->
-          socket.assigns.llmchain
-      end
+          {_, 1} ->
+            LLMChain.add_message(socket.assigns.llmchain, %LangChain.Message{
+              content: "I ran `#{codegen_check.command}` and you have migrations to generate.",
+              processed_content: nil,
+              index: 0,
+              status: :complete,
+              role: :assistant,
+              name: nil,
+              tool_calls: [],
+              tool_results: nil,
+              metadata: nil
+            })
 
-    {:noreply, assign(socket, llmchain: llmchain)}
+          _ ->
+            socket.assigns.llmchain
+        end
+
+      {:noreply, assign(socket, llmchain: llmchain)}
+    else
+      {:noreply, socket}
+    end
   end
 
   defp assign_new_chat(socket) do

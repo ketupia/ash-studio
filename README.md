@@ -55,6 +55,7 @@ This is an experimental playground — feedback and contributions welcome.
     Add :ash_studio to your app's `:host_app` config
     ```elixir
         config :ash_studio,
+            check_migrations: true,
             ash_domains: [AshStudio.Tasks],
             host_app: :ash_studio_demo,
             open_ai_model: "gpt-4o-mini"
@@ -71,7 +72,8 @@ This is an experimental playground — feedback and contributions welcome.
     ]
 
 }
-```
+
+````
 
 ### Routes
 
@@ -97,3 +99,4 @@ This is an experimental playground — feedback and contributions welcome.
     ```elixir
         config :ash_studio, :open_ai_model, "gpt-4o-mini"
     ```
+````
