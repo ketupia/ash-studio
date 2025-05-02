@@ -4,7 +4,7 @@ defmodule AshStudio.MixProject do
   def project do
     [
       app: :ash_studio,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       consolidate_protocols: Mix.env() != :dev,
